@@ -1,6 +1,12 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
+  "globalEnv": [
+    "CONTENTSTACK_API_BASE_URL",
+    "CONTENTSTACK_API_KEY",
+    "CONTENTSTACK_DELIVERY_TOKEN",
+    "CONTENTSTACK_ENVIRONMENT"
+  ],
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
