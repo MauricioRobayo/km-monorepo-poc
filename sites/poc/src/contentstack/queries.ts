@@ -1,4 +1,5 @@
-const gql = String.raw;
+import { gql } from "@apollo/client";
+const gql2 = String.raw;
 
 export type Image = {
   edges: Array<{
@@ -17,7 +18,7 @@ export type Image = {
     };
   }>;
 };
-const image = gql`
+const image = gql2`
   imageConnection {
     edges {
       node {
@@ -41,7 +42,7 @@ type Link = {
   href: string;
   title: string;
 };
-const link = gql`
+const link = gql2`
   link {
     href
     title
@@ -57,7 +58,7 @@ export interface SpotlightQuery {
     imageConnection: Image;
   }>;
 }
-const spotlightQuery = gql`
+const spotlightQuery = gql2`
   spotlight {
     description
     title
@@ -69,7 +70,7 @@ const spotlightQuery = gql`
   }
 `;
 
-const richText = gql`
+const richText = gql2`
   rich_text {
     rich_text_editor {
       json
@@ -97,7 +98,7 @@ export interface BucketsQuery {
     iconConnection: Image;
   }>;
 }
-const bucketsQuery = gql`
+const bucketsQuery = gql2`
   buckets {
     actions {
       description
@@ -131,7 +132,7 @@ export interface HeroQuery {
   title: string;
   link?: Link;
 }
-const heroQuery = gql`
+const heroQuery = gql2`
   hero_section {
     background_color
     description
@@ -152,7 +153,7 @@ interface Actions {
     link: Link;
   };
 }
-const actions = gql`
+const actions = gql2`
   actions {
     actions {
       description
@@ -217,7 +218,7 @@ export interface BlogQuery {
     uid: string;
   };
 }
-const blogQuery = gql`
+const blogQuery = gql2`
   date
   title
   url
@@ -270,68 +271,66 @@ const blogQuery = gql`
 `;
 
 export interface SettingsQueryResult {
-  data: {
-    settings: {
-      copyright: string;
-      site_title: string;
-      logoConnection: {
-        edges: Array<{
-          node: {
-            url: string;
-            dimension: {
-              width: number;
-              height: number;
+  settings: {
+    copyright: string;
+    site_title: string;
+    logoConnection: {
+      edges: Array<{
+        node: {
+          url: string;
+          dimension: {
+            width: number;
+            height: number;
+          };
+        };
+      }>;
+    };
+    menuConnection: {
+      edges: Array<{
+        node: {
+          title: string;
+          menu_items: Array<{
+            label: string;
+            external_link: {
+              href: string;
+              title: string;
             };
-          };
-        }>;
-      };
-      menuConnection: {
-        edges: Array<{
-          node: {
-            title: string;
-            menu_items: Array<{
-              label: string;
-              external_link: {
-                href: string;
-                title: string;
-              };
-              internal_linkConnection: {
-                edges: Array<{
-                  node: {
-                    title: string;
-                    url: string;
-                  };
-                }>;
-              };
-            }>;
-          };
-        }>;
-      };
-      social_links: {
-        social_links: Array<{
-          name: string;
-          link: {
-            href: string;
-            title: string;
-          };
-          iconConnection: {
-            edges: Array<{
-              node: {
-                url: string;
-                dimension: {
-                  width: number;
-                  height: number;
+            internal_linkConnection: {
+              edges: Array<{
+                node: {
+                  title: string;
+                  url: string;
                 };
+              }>;
+            };
+          }>;
+        };
+      }>;
+    };
+    social_links: {
+      social_links: Array<{
+        name: string;
+        link: {
+          href: string;
+          title: string;
+        };
+        iconConnection: {
+          edges: Array<{
+            node: {
+              url: string;
+              dimension: {
+                width: number;
+                height: number;
               };
-            }>;
-          };
-        }>;
-      };
+            };
+          }>;
+        };
+      }>;
     };
   };
 }
 export const settingsQuery = gql`
-  query SettingsQuery {
+  query GetSettings {
     settings(uid: "blt57e0dcd59e4ebe6e") {
       copyright
       site_title
@@ -420,7 +419,7 @@ export interface FeaturedPostsQuery {
     }>;
   };
 }
-const featuredPostsQuery = gql`
+const featuredPostsQuery = gql2`
   blog {
     title
     link {
@@ -450,7 +449,7 @@ const mainContentQueries = {
 
 const queries = Object.entries(mainContentQueries)
   .map(
-    ([key, value]) => gql`
+    ([key, value]) => gql2`
   ... on ${key} {
     __typename
     ${value}
@@ -496,7 +495,7 @@ export type PageQueryResult = {
     };
   };
 };
-export const pageQuery = gql`
+export const pageQuery = gql2`
   query page($url: String!) {
     all_page(where: { url: $url }) {
       items {
@@ -520,7 +519,7 @@ export const pageQuery = gql`
   }
 `;
 
-export const postQuery = gql`
+export const postQuery = gql2`
   query post($url: String!) {
     all_blog_article(where: { url: $url }) {
       items {
