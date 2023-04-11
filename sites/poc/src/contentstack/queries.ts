@@ -519,7 +519,7 @@ export const pageQuery = gql`
   }
 `;
 
-export const postQuery = gql2`
+export const postQuery = gql`
   query post($url: String!) {
     all_blog_article(where: { url: $url }) {
       items {

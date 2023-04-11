@@ -3,6 +3,9 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { GetServerSideProps } from "next/types";
+import client from "../../apollo-client";
+import { postQuery } from "../../contentstack/queries";
+import { jsonToHtml } from "@contentstack/json-rte-serializer";
 
 export interface PostProps {
   page: {
@@ -83,10 +86,41 @@ export default function Post({ page }: PostProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const page = await getBlogPost(`/blog/${context.query.post}`);
+  const { data } = await client.query({
+    query: postQuery,
+    variables: { url: `/blog/${context.query.post}` },
+  });
+
+  const post = data.all_blog_article.items[0];
+
   return {
     props: {
-      page,
+      page: {
+        system: {
+          pageRef: post.system.uid,
+          contentType: post.system.content_type_uid,
+          locale: post.system.locale,
+        },
+        metadata: post.global_field,
+        date: post.date,
+        image: {
+          dimensions: post.featured_imageConnection.edges[0].node.dimension,
+          url: post.featured_imageConnection.edges[0].node.url,
+        },
+        title: post.title,
+        content: jsonToHtml(data.all_blog_article.items[0].content.json),
+        author: {
+          name: post.authorConnection.edges[0].node.title,
+          url: post.authorConnection.edges[0].node.url,
+          image: {
+            url: post.authorConnection.edges[0].node.photoConnection.edges[0]
+              .node.url,
+            dimensions:
+              post.authorConnection.edges[0].node.photoConnection.edges[0].node
+                .dimension,
+          },
+        },
+      },
     },
   };
 };
