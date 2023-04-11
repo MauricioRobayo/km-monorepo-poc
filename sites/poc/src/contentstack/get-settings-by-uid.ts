@@ -1,6 +1,6 @@
-import { graphql } from "../gql";
+import { gql } from "@apollo/client";
 
-export const GET_SETTINGS_BY_UID = graphql(`
+export const GET_SETTINGS_BY_UID = gql`
   query GetSettingsByUid($uid: String!) {
     settings(uid: $uid) {
       copyright
@@ -64,4 +64,4 @@ export const GET_SETTINGS_BY_UID = graphql(`
       }
     }
   }
-`);
+`;
