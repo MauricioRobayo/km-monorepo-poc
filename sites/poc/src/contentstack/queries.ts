@@ -495,7 +495,7 @@ export type PageQueryResult = {
     };
   };
 };
-export const pageQuery = gql2`
+export const pageQuery = gql`
   query page($url: String!) {
     all_page(where: { url: $url }) {
       items {

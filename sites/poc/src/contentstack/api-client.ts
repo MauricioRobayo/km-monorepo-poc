@@ -54,17 +54,6 @@ async function contentstackClient(
   return data;
 }
 
-export async function getPage(url: string) {
-  const response: PageQueryResult = await contentstackClient(pageQuery, {
-    url,
-  });
-  return {
-    system: response.data.all_page.items[0].system,
-    content: response.data.all_page.items[0].main_content,
-    metadata: response.data.all_page.items[0].global_field,
-  };
-}
-
 export async function getBlogPost(url: string): Promise<PostProps["page"]> {
   const response: BlogQueryResult = await contentstackClient(postQuery, {
     url,
@@ -97,38 +86,5 @@ export async function getBlogPost(url: string): Promise<PostProps["page"]> {
             .dimension,
       },
     },
-  };
-}
-
-export async function getSettings(): Promise<PocSettings> {
-  const response: SettingsQueryResult = await contentstackClient(settingsQuery);
-  const data = response.data.settings;
-
-  return {
-    copyright: data.copyright,
-    siteTitle: data.site_title,
-    logo: {
-      url: data.logoConnection.edges[0].node.url,
-      dimensions: data.logoConnection.edges[0].node.dimension,
-    },
-    socialLinks: data.social_links.social_links.map((socialLink) => ({
-      logo: {
-        url: socialLink.iconConnection.edges[0].node.url,
-        dimensions: socialLink.iconConnection.edges[0].node.dimension,
-      },
-      name: socialLink.name,
-      link: socialLink.link,
-    })),
-    menu: data.menuConnection.edges[0].node.menu_items.map((menuItem) => ({
-      label: menuItem.label,
-      link: {
-        href:
-          menuItem.internal_linkConnection.edges[0]?.node.url ||
-          menuItem.external_link.href,
-        title:
-          menuItem.internal_linkConnection.edges[0]?.node.title ||
-          menuItem.external_link.title,
-      },
-    })),
   };
 }

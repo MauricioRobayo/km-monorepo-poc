@@ -1,23 +1,24 @@
+import { GetServerSideProps } from "next";
+import Head from "next/head";
 import {
-  Spotlight,
-  SpotlightProps,
   Actions,
-  Hero,
-  HeroProps,
-  FeaturedPosts,
-  FeaturedPostsProps,
   Buckets,
   BucketsProps,
+  FeaturedPosts,
+  FeaturedPostsProps,
+  Hero,
+  HeroProps,
+  Spotlight,
+  SpotlightProps,
 } from "ui";
-import { getPage } from "../contentstack/api-client";
-import { GetServerSideProps } from "next";
-import type {
-  FeaturedPostsQuery,
+import client from "../apollo-client";
+import {
   BucketsQuery,
+  FeaturedPostsQuery,
   HeroQuery,
   SpotlightQuery,
+  pageQuery,
 } from "../contentstack/queries";
-import Head from "next/head";
 
 const mainContentComponents: { [key: string]: any } = {
   // PageMainContentRichText: richText,
@@ -78,9 +79,16 @@ export default function Page({
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { system, metadata, content } = await getPage(
-    `/${context.query.page ?? ""}`
-  );
+  const { data } = await client.query({
+    query: pageQuery,
+    variables: { url: `/${context.query.page ?? ""}` },
+  });
+  const {
+    system,
+    main_content: content,
+    global_field: metadata,
+  } = data.all_page.items[0];
+
   return {
     props: {
       page: {
@@ -89,8 +97,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           locale: system.locale,
           pageRef: system.uid,
         },
-        metadata,
-        content: content.map((block) => {
+        metadata: metadata,
+        content: content.map((block: any) => {
           return Object.fromEntries(
             Object.entries(block).map(([key, value]) => {
               if (key === "__typename") {
