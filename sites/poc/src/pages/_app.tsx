@@ -66,11 +66,15 @@ export default function PocApp({ Component, pageProps, settings }: TProps) {
 }
 
 PocApp.getInitialProps = async (context: AppContext) => {
+  const uid = process.env.CONTENTSTACK_SETTINGS_UID;
+  if (!uid) {
+    throw new Error("Settings uid env var is missing.");
+  }
   const [ctx, query] = await Promise.all([
     App.getInitialProps(context),
     client.query({
       query: GetSettingsByUidDocument,
-      variables: { uid: "blt57e0dcd59e4ebe6e" },
+      variables: { uid },
     }),
   ]);
 
