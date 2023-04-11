@@ -17,7 +17,7 @@ import {
   FeaturedPostsQuery,
   HeroQuery,
   SpotlightQuery,
-  pageQuery,
+  GET_PAGE_BY_URL,
 } from "../contentstack/queries";
 
 const mainContentComponents: { [key: string]: any } = {
@@ -80,7 +80,7 @@ export default function Page({
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { data } = await client.query({
-    query: pageQuery,
+    query: GET_PAGE_BY_URL,
     variables: { url: `/${context.query.page ?? ""}` },
   });
   const {

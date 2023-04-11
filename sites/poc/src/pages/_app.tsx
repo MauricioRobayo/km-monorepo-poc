@@ -1,10 +1,12 @@
-import App, { AppContext } from "next/app";
-import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { getSettings } from "../contentstack/api-client";
-import { Header, Footer } from "ui";
+import App, { AppContext } from "next/app";
+import { Footer, Header } from "ui";
 import client from "../apollo-client";
-import { SettingsQueryResult, settingsQuery } from "../contentstack/queries";
+import "../styles/globals.css";
+import {
+  GetSettingsByUidDocument,
+  GetSettingsByUidQuery,
+} from "../gql/graphql";
 
 export interface PocSettings {
   copyright: string;
@@ -66,41 +68,50 @@ export default function PocApp({ Component, pageProps, settings }: TProps) {
 PocApp.getInitialProps = async (context: AppContext) => {
   const [ctx, query] = await Promise.all([
     App.getInitialProps(context),
-    client.query<SettingsQueryResult, { uid: string }>({
-      query: settingsQuery,
-      variables: { uid: process.env.CONTENTSTACK_SETTINGS_UID ?? "" },
+    client.query({
+      query: GetSettingsByUidDocument,
+      variables: { uid: "blt57e0dcd59e4ebe6e" },
     }),
   ]);
 
-  return { ...ctx, settings: mapQueryResultToSettings(query.data.settings) };
+  return {
+    ...ctx,
+    settings: query.data.settings
+      ? mapQueryResultToSettings(query.data.settings)
+      : null,
+  };
 };
 
-function mapQueryResultToSettings(settings: SettingsQueryResult["settings"]) {
+function mapQueryResultToSettings(
+  settings: NonNullable<GetSettingsByUidQuery["settings"]>
+) {
   return {
     copyright: settings.copyright,
     siteTitle: settings.site_title,
     logo: {
-      url: settings.logoConnection.edges[0].node.url,
-      dimensions: settings.logoConnection.edges[0].node.dimension,
+      url: settings.logoConnection?.edges?.[0]?.node?.url,
+      dimensions: settings.logoConnection?.edges?.[0]?.node?.dimension,
     },
-    socialLinks: settings.social_links.social_links.map((socialLink) => ({
+    socialLinks: settings.social_links?.social_links?.map((socialLink) => ({
       logo: {
-        url: socialLink.iconConnection.edges[0].node.url,
-        dimensions: socialLink.iconConnection.edges[0].node.dimension,
+        url: socialLink?.iconConnection?.edges?.[0]?.node?.url,
+        dimensions: socialLink?.iconConnection?.edges?.[0]?.node?.dimension,
       },
-      name: socialLink.name,
-      link: socialLink.link,
+      name: socialLink?.name,
+      link: socialLink?.link,
     })),
-    menu: settings.menuConnection.edges[0].node.menu_items.map((menuItem) => ({
-      label: menuItem.label,
-      link: {
-        href:
-          menuItem.internal_linkConnection.edges[0]?.node.url ||
-          menuItem.external_link.href,
-        title:
-          menuItem.internal_linkConnection.edges[0]?.node.title ||
-          menuItem.external_link.title,
-      },
-    })),
+    menu: settings.menuConnection?.edges?.[0]?.node?.menu_items?.map(
+      (menuItem) => ({
+        label: menuItem?.label,
+        link: {
+          href:
+            menuItem?.internal_linkConnection?.edges?.[0]?.node?.url ||
+            menuItem?.external_link?.href,
+          title:
+            menuItem?.internal_linkConnection?.edges?.[0]?.node?.title ||
+            menuItem?.external_link?.title,
+        },
+      })
+    ),
   };
 }

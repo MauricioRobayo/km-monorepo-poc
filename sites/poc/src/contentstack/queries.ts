@@ -270,131 +270,6 @@ const blogQuery = gql2`
   }
 `;
 
-export interface SettingsQueryResult {
-  settings: {
-    copyright: string;
-    site_title: string;
-    logoConnection: {
-      edges: Array<{
-        node: {
-          url: string;
-          dimension: {
-            width: number;
-            height: number;
-          };
-        };
-      }>;
-    };
-    menuConnection: {
-      edges: Array<{
-        node: {
-          title: string;
-          menu_items: Array<{
-            label: string;
-            external_link: {
-              href: string;
-              title: string;
-            };
-            internal_linkConnection: {
-              edges: Array<{
-                node: {
-                  title: string;
-                  url: string;
-                };
-              }>;
-            };
-          }>;
-        };
-      }>;
-    };
-    social_links: {
-      social_links: Array<{
-        name: string;
-        link: {
-          href: string;
-          title: string;
-        };
-        iconConnection: {
-          edges: Array<{
-            node: {
-              url: string;
-              dimension: {
-                width: number;
-                height: number;
-              };
-            };
-          }>;
-        };
-      }>;
-    };
-  };
-}
-export const settingsQuery = gql`
-  query GetSettings {
-    settings(uid: "blt57e0dcd59e4ebe6e") {
-      copyright
-      site_title
-      logoConnection {
-        edges {
-          node {
-            url
-            dimension {
-              height
-              width
-            }
-          }
-        }
-      }
-      menuConnection {
-        edges {
-          node {
-            ... on Menu {
-              title
-              menu_items {
-                label
-                external_link {
-                  href
-                  title
-                }
-                internal_linkConnection {
-                  edges {
-                    node {
-                      ... on Page {
-                        title
-                        url
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-      social_links {
-        social_links {
-          iconConnection {
-            edges {
-              node {
-                url
-                dimension {
-                  height
-                  width
-                }
-              }
-            }
-          }
-          link {
-            href
-            title
-          }
-          name
-        }
-      }
-    }
-  }
-`;
-
 export interface FeaturedPostsQuery {
   title: string;
   link: Link;
@@ -495,8 +370,8 @@ export type PageQueryResult = {
     };
   };
 };
-export const pageQuery = gql`
-  query page($url: String!) {
+export const GET_PAGE_BY_URL = gql`
+  query GetPageByUrlQuery($url: String!) {
     all_page(where: { url: $url }) {
       items {
         title
