@@ -6,32 +6,24 @@
     "dev": "next dev --port 3000",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "graphql:compile": "graphql-codegen --require=dotenv/config --config=codegen.ts dotenv_config_path=.env.local",
-    "graphql:watch": "graphql-codegen --require=dotenv/config --config=codegen.ts dotenv_config_path=.env.local --watch"
+    "lint": "next lint"
   },
   "dependencies": {
-    "@apollo/client": "^3.7.11",
-    "@contentstack/json-rte-serializer": "^2.0.2",
     "@types/node": "18.15.11",
     "@types/react": "18.0.31",
     "@types/react-dom": "18.0.11",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
-    "graphql": "^16.6.0",
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "ui": "*"
+    "ui": "*",
+    "contentstack": "*"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "3.3.0",
-    "@graphql-codegen/client-preset": "3.0.0",
     "@tailwindcss/typography": "^0.5.9",
     "autoprefixer": "^10.4.14",
     "eslint-config-custom": "*",
-    "install": "^0.13.0",
-    "npm": "^9.6.3",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.3.0",
     "tsconfig": "*",

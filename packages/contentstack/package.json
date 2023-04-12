@@ -1,0 +1,27 @@
+{
+  "name": "contentstack",
+  "version": "0.0.0",
+  "main": "./src/index.tsx",
+  "types": "./src/index.tsx",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint \"./src/**/*.ts*\"",
+    "graphql:compile": "graphql-codegen --require=dotenv/config --config=codegen.ts dotenv_config_path=.env.local",
+    "graphql:watch": "graphql-codegen --require=dotenv/config --config=codegen.ts dotenv_config_path=.env.local --watch"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^3.3.0",
+    "@graphql-codegen/client-preset": "^3.0.0",
+    "@types/react": "^18.0.22",
+    "eslint": "^7.32.0",
+    "eslint-config-custom": "*",
+    "react": "^18.2.0",
+    "tsconfig": "*",
+    "typescript": "^4.5.2"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.7.11",
+    "@contentstack/json-rte-serializer": "^2.0.2",
+    "graphql": "^16.6.0"
+  }
+}

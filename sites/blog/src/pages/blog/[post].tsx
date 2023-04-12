@@ -1,11 +1,8 @@
-import { jsonToHtml } from "@contentstack/json-rte-serializer";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { GetServerSideProps } from "next/types";
-import client from "../../apollo-client";
-import { GetPostByUrlDocument } from "../../gql/graphql";
-import { getPostByUrl } from "../../contentstack/api";
+import { getPostByUrl } from "contentstack";
 
 export interface PostProps {
   page: {

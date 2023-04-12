@@ -11,9 +11,7 @@ import {
   Spotlight,
   SpotlightProps,
 } from "ui";
-import client from "../apollo-client";
-import { GetPageByUrlDocument } from "../gql/graphql";
-import { getPageByUrl } from "../contentstack/api";
+import { getPageByUrl } from "contentstack";
 
 const mainContentComponents: { [key: string]: any } = {
   // PageMainContentRichText: richText,

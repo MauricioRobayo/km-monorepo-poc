@@ -1,10 +1,10 @@
 import { jsonToHtml } from "@contentstack/json-rte-serializer";
-import client from "../apollo-client";
+import client from "./apollo-client";
 import {
   GetPageByUrlDocument,
   GetPostByUrlDocument,
   GetSettingsByUidDocument,
-} from "../gql/graphql";
+} from "./gql/graphql";
 
 export async function getSettings() {
   const uid = process.env.CONTENTSTACK_SETTINGS_UID;
