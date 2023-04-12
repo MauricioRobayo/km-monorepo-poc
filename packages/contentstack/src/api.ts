@@ -4,6 +4,7 @@ import {
   GetPageByUrlDocument,
   GetPostByUrlDocument,
   GetSettingsByUidDocument,
+  SysAssetConnection,
 } from "./__generated__/graphql";
 
 export async function getSettings(uid: string) {
@@ -21,15 +22,9 @@ export async function getSettings(uid: string) {
   return {
     copyright: settings.copyright,
     siteTitle: settings.site_title,
-    logo: {
-      url: settings.logoConnection?.edges?.[0]?.node?.url,
-      dimensions: settings.logoConnection?.edges?.[0]?.node?.dimension,
-    },
+    logo: mapSysAssetConnectionToImage(settings.logoConnection),
     socialLinks: settings.social_links?.social_links?.map((socialLink) => ({
-      logo: {
-        url: socialLink?.iconConnection?.edges?.[0]?.node?.url,
-        dimensions: socialLink?.iconConnection?.edges?.[0]?.node?.dimension,
-      },
+      logo: mapSysAssetConnectionToImage(socialLink?.iconConnection),
       name: socialLink?.name,
       link: socialLink?.link,
     })),
@@ -97,22 +92,25 @@ export async function getPostByUrl(url: string) {
     },
     metadata: post?.global_field,
     date: post?.date,
-    image: {
-      dimensions: post?.featured_imageConnection?.edges?.[0]?.node?.dimension,
-      url: post?.featured_imageConnection?.edges?.[0]?.node?.url,
-    },
+    image: mapSysAssetConnectionToImage(post?.featured_imageConnection),
     title: post?.title,
     content: jsonToHtml(data?.all_blog_article?.items?.[0]?.content?.json),
     author: {
       name: post?.authorConnection?.edges?.[0]?.node?.title,
       url: post?.authorConnection?.edges?.[0]?.node?.url,
-      image: {
-        url: post?.authorConnection?.edges?.[0]?.node?.photoConnection
-          ?.edges?.[0]?.node?.url,
-        dimensions:
-          post?.authorConnection?.edges?.[0]?.node?.photoConnection?.edges?.[0]
-            ?.node?.dimension,
-      },
+      image: mapSysAssetConnectionToImage(
+        post?.authorConnection?.edges?.[0]?.node?.photoConnection
+      ),
     },
+  };
+}
+
+function mapSysAssetConnectionToImage(
+  sysAssetConnection?: SysAssetConnection | null
+) {
+  const node = sysAssetConnection?.edges?.[0]?.node;
+  return {
+    url: node?.url,
+    dimensions: node?.dimension,
   };
 }
