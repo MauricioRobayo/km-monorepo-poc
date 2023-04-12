@@ -4,9 +4,6 @@ import {
   GetPageByUrlDocument,
   GetPostByUrlDocument,
   GetSettingsByUidDocument,
-  GetSettingsByUidQuery,
-  ImagePartsFragment,
-  Settings,
 } from "../gql/graphql";
 
 export async function getSettings() {

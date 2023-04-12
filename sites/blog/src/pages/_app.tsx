@@ -46,14 +46,14 @@ type TProps = Pick<AppProps, "Component" | "pageProps"> & {
   settings: PocSettings;
 };
 
-export default function PocApp({ Component, pageProps, settings }: TProps) {
-  const { system } = pageProps.page;
+export default function BlogApp({ Component, pageProps, settings }: TProps) {
+  const { system } = pageProps.page ?? {};
   return (
     <div
       className="text-slate-600"
-      data-contenttype={system.contentType}
-      data-locale={system.locale}
-      data-pageref={system.pageRef}
+      data-contenttype={system?.contentType ?? false}
+      data-locale={system?.locale ?? false}
+      data-pageref={system?.pageRef ?? false}
     >
       <Header
         logo={settings.logo}
@@ -66,7 +66,7 @@ export default function PocApp({ Component, pageProps, settings }: TProps) {
   );
 }
 
-PocApp.getInitialProps = async (context: AppContext) => {
+BlogApp.getInitialProps = async (context: AppContext) => {
   const [ctx, settings] = await Promise.all([
     App.getInitialProps(context),
     getSettings(),
