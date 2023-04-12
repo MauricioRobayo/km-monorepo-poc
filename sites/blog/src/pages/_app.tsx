@@ -1,13 +1,8 @@
 import type { AppProps } from "next/app";
 import App, { AppContext } from "next/app";
+import { getSettings } from "contentstack";
 import { Footer, Header } from "ui";
-import client from "../apollo-client";
 import "../styles/globals.css";
-import {
-  GetSettingsByUidDocument,
-  GetSettingsByUidQuery,
-} from "../gql/graphql";
-import { getSettings } from "../contentstack/api";
 
 export interface PocSettings {
   copyright: string;
