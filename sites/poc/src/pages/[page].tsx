@@ -1,23 +1,19 @@
+import { GetServerSideProps } from "next";
+import Head from "next/head";
 import {
-  Spotlight,
-  SpotlightProps,
   Actions,
-  Hero,
-  HeroProps,
-  FeaturedPosts,
-  FeaturedPostsProps,
   Buckets,
   BucketsProps,
+  FeaturedPosts,
+  FeaturedPostsProps,
+  Hero,
+  HeroProps,
+  Spotlight,
+  SpotlightProps,
 } from "ui";
-import { getPage } from "../contentstack/api-client";
-import { GetServerSideProps } from "next";
-import type {
-  FeaturedPostsQuery,
-  BucketsQuery,
-  HeroQuery,
-  SpotlightQuery,
-} from "../contentstack/queries";
-import Head from "next/head";
+import client from "../apollo-client";
+import { GetPageByUrlDocument } from "../gql/graphql";
+import { getPageByUrl } from "../contentstack/api";
 
 const mainContentComponents: { [key: string]: any } = {
   // PageMainContentRichText: richText,
@@ -78,35 +74,15 @@ export default function Page({
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { system, metadata, content } = await getPage(
-    `/${context.query.page ?? ""}`
-  );
+  const page = await getPageByUrl(`/${context.query.page ?? ""}`);
   return {
     props: {
-      page: {
-        system: {
-          contentType: system.content_type_uid,
-          locale: system.locale,
-          pageRef: system.uid,
-        },
-        metadata,
-        content: content.map((block) => {
-          return Object.fromEntries(
-            Object.entries(block).map(([key, value]) => {
-              if (key === "__typename") {
-                return ["type", value];
-              } else {
-                return ["content", value];
-              }
-            })
-          );
-        }),
-      },
+      page,
     },
   };
 };
 
-function mapHeroToHeroProps(data: HeroQuery): HeroProps {
+function mapHeroToHeroProps(data: any): HeroProps {
   return {
     title: data.title,
     description: data.description,
@@ -121,11 +97,11 @@ function mapHeroToHeroProps(data: HeroQuery): HeroProps {
   };
 }
 
-function mapBucketsToBucketsProps(data: BucketsQuery): BucketsProps {
+function mapBucketsToBucketsProps(data: any): BucketsProps {
   return {
     title: data.title,
     description: data.description,
-    buckets: data.actions.map((action) => {
+    buckets: data.actions.map((action: any) => {
       return {
         title: action.title,
         description: action.description,
@@ -139,11 +115,11 @@ function mapBucketsToBucketsProps(data: BucketsQuery): BucketsProps {
   };
 }
 
-function mapBlogToFeaturedPosts(data: FeaturedPostsQuery): FeaturedPostsProps {
+function mapBlogToFeaturedPosts(data: any): FeaturedPostsProps {
   return {
     title: data.title,
     link: data.link,
-    posts: data.referenceConnection.edges.map((post) => ({
+    posts: data.referenceConnection.edges.map((post: any) => ({
       summary: post.node.summary,
       title: post.node.title,
       url: post.node.url,
@@ -155,11 +131,11 @@ function mapBlogToFeaturedPosts(data: FeaturedPostsQuery): FeaturedPostsProps {
   };
 }
 
-function mapSpotlightToSpotlightProps(data: SpotlightQuery): SpotlightProps {
+function mapSpotlightToSpotlightProps(data: any): SpotlightProps {
   return {
     description: data.description,
     title: data.title,
-    highlights: data.caption.map((highlight) => ({
+    highlights: data.caption.map((highlight: any) => ({
       description: highlight.description,
       title: highlight.title,
       image: {

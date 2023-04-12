@@ -1,8 +1,11 @@
-import { getBlogPost } from "../../contentstack/api-client";
+import { jsonToHtml } from "@contentstack/json-rte-serializer";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { GetServerSideProps } from "next/types";
+import client from "../../apollo-client";
+import { GetPostByUrlDocument } from "../../gql/graphql";
+import { getPostByUrl } from "../../contentstack/api";
 
 export interface PostProps {
   page: {
@@ -83,10 +86,11 @@ export default function Post({ page }: PostProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const page = await getBlogPost(`/blog/${context.query.post}`);
+  const post = await getPostByUrl(`/blog/${context.query.post}`);
+
   return {
     props: {
-      page,
+      page: post,
     },
   };
 };

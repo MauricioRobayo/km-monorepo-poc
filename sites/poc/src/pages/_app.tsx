@@ -1,8 +1,13 @@
-import App, { AppContext } from "next/app";
-import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { getSettings } from "../contentstack/api-client";
-import { Header, Footer } from "ui";
+import App, { AppContext } from "next/app";
+import { Footer, Header } from "ui";
+import client from "../apollo-client";
+import "../styles/globals.css";
+import {
+  GetSettingsByUidDocument,
+  GetSettingsByUidQuery,
+} from "../gql/graphql";
+import { getSettings } from "../contentstack/api";
 
 export interface PocSettings {
   copyright: string;
@@ -67,5 +72,8 @@ PocApp.getInitialProps = async (context: AppContext) => {
     getSettings(),
   ]);
 
-  return { ...ctx, settings };
+  return {
+    ...ctx,
+    settings,
+  };
 };
