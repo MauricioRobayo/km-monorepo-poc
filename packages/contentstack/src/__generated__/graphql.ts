@@ -2152,118 +2152,46 @@ export type SystemPublishDetailsWhere = {
   user_nin?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type LinkPartsFragment = { __typename?: 'Link', title?: string | null, href?: string | null } & { ' $fragmentName'?: 'LinkPartsFragment' };
+export type LinkPartsFragment = { __typename?: 'Link', title?: string | null, href?: string | null };
 
-export type ImagePartsFragment = { __typename?: 'SysAssetConnection', edges?: Array<{ __typename?: 'SysAssetEdge', node?: { __typename?: 'SysAsset', url?: string | null, dimension?: { __typename?: 'SysAssetDimension', height?: number | null, width?: number | null } | null } | null } | null> | null } & { ' $fragmentName'?: 'ImagePartsFragment' };
+export type ImagePartsFragment = { __typename?: 'SysAssetConnection', edges?: Array<{ __typename?: 'SysAssetEdge', node?: { __typename?: 'SysAsset', url?: string | null, dimension?: { __typename?: 'SysAssetDimension', height?: number | null, width?: number | null } | null } | null } | null> | null };
 
-export type SeoPartsFragment = { __typename?: 'Seo', description?: string | null, title?: string | null, keywords?: string | null } & { ' $fragmentName'?: 'SeoPartsFragment' };
+export type SeoPartsFragment = { __typename?: 'Seo', description?: string | null, title?: string | null, keywords?: string | null };
 
-export type SystemPartsFragment = { __typename?: 'EntrySystemField', content_type_uid?: string | null, locale?: string | null, uid?: string | null } & { ' $fragmentName'?: 'SystemPartsFragment' };
+export type SystemPartsFragment = { __typename?: 'EntrySystemField', content_type_uid?: string | null, locale?: string | null, uid?: string | null };
 
-export type BlogArticlePartsFragment = { __typename?: 'BlogArticle', date?: any | null, title?: string | null, url?: string | null, summary?: string | null, featured_imageConnection?: (
-    { __typename?: 'SysAssetConnection' }
-    & { ' $fragmentRefs'?: { 'ImagePartsFragment': ImagePartsFragment } }
-  ) | null, content?: { __typename?: 'BlogArticleContent', json?: any | null } | null, authorConnection?: { __typename?: 'BlogArticleAuthorConnection', edges?: Array<{ __typename?: 'BlogArticleAuthorEdge', node?: { __typename?: 'Author', title?: string | null, url?: string | null, photoConnection?: (
-          { __typename?: 'SysAssetConnection' }
-          & { ' $fragmentRefs'?: { 'ImagePartsFragment': ImagePartsFragment } }
-        ) | null } | null } | null> | null } | null, global_field?: (
-    { __typename?: 'Seo' }
-    & { ' $fragmentRefs'?: { 'SeoPartsFragment': SeoPartsFragment } }
-  ) | null, system?: (
-    { __typename?: 'EntrySystemField' }
-    & { ' $fragmentRefs'?: { 'SystemPartsFragment': SystemPartsFragment } }
-  ) | null } & { ' $fragmentName'?: 'BlogArticlePartsFragment' };
+export type BlogArticlePartsFragment = { __typename?: 'BlogArticle', date?: any | null, title?: string | null, url?: string | null, summary?: string | null, featured_imageConnection?: { __typename?: 'SysAssetConnection', edges?: Array<{ __typename?: 'SysAssetEdge', node?: { __typename?: 'SysAsset', url?: string | null, dimension?: { __typename?: 'SysAssetDimension', height?: number | null, width?: number | null } | null } | null } | null> | null } | null, content?: { __typename?: 'BlogArticleContent', json?: any | null } | null, authorConnection?: { __typename?: 'BlogArticleAuthorConnection', edges?: Array<{ __typename?: 'BlogArticleAuthorEdge', node?: { __typename?: 'Author', title?: string | null, url?: string | null, photoConnection?: { __typename?: 'SysAssetConnection', edges?: Array<{ __typename?: 'SysAssetEdge', node?: { __typename?: 'SysAsset', url?: string | null, dimension?: { __typename?: 'SysAssetDimension', height?: number | null, width?: number | null } | null } | null } | null> | null } | null } | null } | null> | null } | null, global_field?: { __typename?: 'Seo', description?: string | null, title?: string | null, keywords?: string | null } | null, system?: { __typename?: 'EntrySystemField', content_type_uid?: string | null, locale?: string | null, uid?: string | null } | null };
 
-export type BucketsPartsFragment = { __typename: 'PageMainContentBuckets', buckets?: { __typename?: 'PageMainContentBucketsBlock', title?: string | null, description?: string | null, actions?: Array<{ __typename?: 'PageMainContentBucketsBlockActions', description?: string | null, title?: string | null, iconConnection?: (
-        { __typename?: 'SysAssetConnection' }
-        & { ' $fragmentRefs'?: { 'ImagePartsFragment': ImagePartsFragment } }
-      ) | null, link?: (
-        { __typename?: 'Link' }
-        & { ' $fragmentRefs'?: { 'LinkPartsFragment': LinkPartsFragment } }
-      ) | null } | null> | null } | null } & { ' $fragmentName'?: 'BucketsPartsFragment' };
+export type BucketsPartsFragment = { __typename: 'PageMainContentBuckets', buckets?: { __typename?: 'PageMainContentBucketsBlock', title?: string | null, description?: string | null, actions?: Array<{ __typename?: 'PageMainContentBucketsBlockActions', description?: string | null, title?: string | null, iconConnection?: { __typename?: 'SysAssetConnection', edges?: Array<{ __typename?: 'SysAssetEdge', node?: { __typename?: 'SysAsset', url?: string | null, dimension?: { __typename?: 'SysAssetDimension', height?: number | null, width?: number | null } | null } | null } | null> | null } | null, link?: { __typename?: 'Link', title?: string | null, href?: string | null } | null } | null> | null } | null };
 
-export type HeroPartsFragment = { __typename: 'PageMainContentHeroSection', hero_section?: { __typename?: 'PageMainContentHeroSectionBlock', background_color?: string | null, description?: string | null, text_color?: string | null, title?: string | null, hero_image?: { __typename?: 'PageMainContentHeroSectionBlockHeroImage', position?: string | null, imageConnection?: (
-        { __typename?: 'SysAssetConnection' }
-        & { ' $fragmentRefs'?: { 'ImagePartsFragment': ImagePartsFragment } }
-      ) | null } | null, link?: (
-      { __typename?: 'Link' }
-      & { ' $fragmentRefs'?: { 'LinkPartsFragment': LinkPartsFragment } }
-    ) | null } | null } & { ' $fragmentName'?: 'HeroPartsFragment' };
+export type HeroPartsFragment = { __typename: 'PageMainContentHeroSection', hero_section?: { __typename?: 'PageMainContentHeroSectionBlock', background_color?: string | null, description?: string | null, text_color?: string | null, title?: string | null, hero_image?: { __typename?: 'PageMainContentHeroSectionBlockHeroImage', position?: string | null, imageConnection?: { __typename?: 'SysAssetConnection', edges?: Array<{ __typename?: 'SysAssetEdge', node?: { __typename?: 'SysAsset', url?: string | null, dimension?: { __typename?: 'SysAssetDimension', height?: number | null, width?: number | null } | null } | null } | null> | null } | null } | null, link?: { __typename?: 'Link', title?: string | null, href?: string | null } | null } | null };
 
-export type ActionsPartsFragment = { __typename: 'PageMainContentActions', actions?: { __typename?: 'PageMainContentActionsBlock', actions?: Array<{ __typename?: 'PageMainContentActionsBlockActions', description?: string | null, title?: string | null, link?: (
-        { __typename?: 'Link' }
-        & { ' $fragmentRefs'?: { 'LinkPartsFragment': LinkPartsFragment } }
-      ) | null } | null> | null } | null } & { ' $fragmentName'?: 'ActionsPartsFragment' };
+export type ActionsPartsFragment = { __typename: 'PageMainContentActions', actions?: { __typename?: 'PageMainContentActionsBlock', actions?: Array<{ __typename?: 'PageMainContentActionsBlockActions', description?: string | null, title?: string | null, link?: { __typename?: 'Link', title?: string | null, href?: string | null } | null } | null> | null } | null };
 
-export type SpotlightPartsFragment = { __typename: 'PageMainContentSpotlight', spotlight?: { __typename?: 'PageMainContentSpotlightBlock', description?: string | null, title?: string | null, caption?: Array<{ __typename?: 'PageMainContentSpotlightBlockCaption', description?: string | null, title?: string | null, imageConnection?: (
-        { __typename?: 'SysAssetConnection' }
-        & { ' $fragmentRefs'?: { 'ImagePartsFragment': ImagePartsFragment } }
-      ) | null } | null> | null } | null } & { ' $fragmentName'?: 'SpotlightPartsFragment' };
+export type SpotlightPartsFragment = { __typename: 'PageMainContentSpotlight', spotlight?: { __typename?: 'PageMainContentSpotlightBlock', description?: string | null, title?: string | null, caption?: Array<{ __typename?: 'PageMainContentSpotlightBlockCaption', description?: string | null, title?: string | null, imageConnection?: { __typename?: 'SysAssetConnection', edges?: Array<{ __typename?: 'SysAssetEdge', node?: { __typename?: 'SysAsset', url?: string | null, dimension?: { __typename?: 'SysAssetDimension', height?: number | null, width?: number | null } | null } | null } | null> | null } | null } | null> | null } | null };
 
-export type BlogPartsFragment = { __typename: 'PageMainContentBlog', blog?: { __typename?: 'PageMainContentBlogBlock', title?: string | null, link?: (
-      { __typename?: 'Link' }
-      & { ' $fragmentRefs'?: { 'LinkPartsFragment': LinkPartsFragment } }
-    ) | null, referenceConnection?: { __typename?: 'PageMainContentBlogBlockReferenceConnection', edges?: Array<{ __typename?: 'PageMainContentBlogBlockReferenceEdge', node?: (
-          { __typename?: 'BlogArticle' }
-          & { ' $fragmentRefs'?: { 'BlogArticlePartsFragment': BlogArticlePartsFragment } }
-        ) | null } | null> | null } | null } | null } & { ' $fragmentName'?: 'BlogPartsFragment' };
+export type BlogPartsFragment = { __typename: 'PageMainContentBlog', blog?: { __typename?: 'PageMainContentBlogBlock', title?: string | null, link?: { __typename?: 'Link', title?: string | null, href?: string | null } | null, referenceConnection?: { __typename?: 'PageMainContentBlogBlockReferenceConnection', edges?: Array<{ __typename?: 'PageMainContentBlogBlockReferenceEdge', node?: { __typename?: 'BlogArticle', date?: any | null, title?: string | null, url?: string | null, summary?: string | null, featured_imageConnection?: { __typename?: 'SysAssetConnection', edges?: Array<{ __typename?: 'SysAssetEdge', node?: { __typename?: 'SysAsset', url?: string | null, dimension?: { __typename?: 'SysAssetDimension', height?: number | null, width?: number | null } | null } | null } | null> | null } | null, content?: { __typename?: 'BlogArticleContent', json?: any | null } | null, authorConnection?: { __typename?: 'BlogArticleAuthorConnection', edges?: Array<{ __typename?: 'BlogArticleAuthorEdge', node?: { __typename?: 'Author', title?: string | null, url?: string | null, photoConnection?: { __typename?: 'SysAssetConnection', edges?: Array<{ __typename?: 'SysAssetEdge', node?: { __typename?: 'SysAsset', url?: string | null, dimension?: { __typename?: 'SysAssetDimension', height?: number | null, width?: number | null } | null } | null } | null> | null } | null } | null } | null> | null } | null, global_field?: { __typename?: 'Seo', description?: string | null, title?: string | null, keywords?: string | null } | null, system?: { __typename?: 'EntrySystemField', content_type_uid?: string | null, locale?: string | null, uid?: string | null } | null } | null } | null> | null } | null } | null };
 
 export type GetPageByUrlQueryVariables = Exact<{
   url: Scalars['String'];
 }>;
 
 
-export type GetPageByUrlQuery = { __typename?: 'Query', all_page?: { __typename?: 'AllPage', items?: Array<{ __typename?: 'Page', title?: string | null, url?: string | null, main_content?: Array<(
-        { __typename?: 'PageMainContentActions' }
-        & { ' $fragmentRefs'?: { 'ActionsPartsFragment': ActionsPartsFragment } }
-      ) | (
-        { __typename?: 'PageMainContentBlog' }
-        & { ' $fragmentRefs'?: { 'BlogPartsFragment': BlogPartsFragment } }
-      ) | (
-        { __typename?: 'PageMainContentBuckets' }
-        & { ' $fragmentRefs'?: { 'BucketsPartsFragment': BucketsPartsFragment } }
-      ) | (
-        { __typename?: 'PageMainContentHeroSection' }
-        & { ' $fragmentRefs'?: { 'HeroPartsFragment': HeroPartsFragment } }
-      ) | { __typename?: 'PageMainContentRichText' } | (
-        { __typename?: 'PageMainContentSpotlight' }
-        & { ' $fragmentRefs'?: { 'SpotlightPartsFragment': SpotlightPartsFragment } }
-      ) | null> | null, global_field?: (
-        { __typename?: 'Seo' }
-        & { ' $fragmentRefs'?: { 'SeoPartsFragment': SeoPartsFragment } }
-      ) | null, system?: (
-        { __typename?: 'EntrySystemField' }
-        & { ' $fragmentRefs'?: { 'SystemPartsFragment': SystemPartsFragment } }
-      ) | null } | null> | null } | null };
+export type GetPageByUrlQuery = { __typename?: 'Query', all_page?: { __typename?: 'AllPage', items?: Array<{ __typename?: 'Page', title?: string | null, url?: string | null, main_content?: Array<{ __typename: 'PageMainContentActions', actions?: { __typename?: 'PageMainContentActionsBlock', actions?: Array<{ __typename?: 'PageMainContentActionsBlockActions', description?: string | null, title?: string | null, link?: { __typename?: 'Link', title?: string | null, href?: string | null } | null } | null> | null } | null } | { __typename: 'PageMainContentBlog', blog?: { __typename?: 'PageMainContentBlogBlock', title?: string | null, link?: { __typename?: 'Link', title?: string | null, href?: string | null } | null, referenceConnection?: { __typename?: 'PageMainContentBlogBlockReferenceConnection', edges?: Array<{ __typename?: 'PageMainContentBlogBlockReferenceEdge', node?: { __typename?: 'BlogArticle', date?: any | null, title?: string | null, url?: string | null, summary?: string | null, featured_imageConnection?: { __typename?: 'SysAssetConnection', edges?: Array<{ __typename?: 'SysAssetEdge', node?: { __typename?: 'SysAsset', url?: string | null, dimension?: { __typename?: 'SysAssetDimension', height?: number | null, width?: number | null } | null } | null } | null> | null } | null, content?: { __typename?: 'BlogArticleContent', json?: any | null } | null, authorConnection?: { __typename?: 'BlogArticleAuthorConnection', edges?: Array<{ __typename?: 'BlogArticleAuthorEdge', node?: { __typename?: 'Author', title?: string | null, url?: string | null, photoConnection?: { __typename?: 'SysAssetConnection', edges?: Array<{ __typename?: 'SysAssetEdge', node?: { __typename?: 'SysAsset', url?: string | null, dimension?: { __typename?: 'SysAssetDimension', height?: number | null, width?: number | null } | null } | null } | null> | null } | null } | null } | null> | null } | null, global_field?: { __typename?: 'Seo', description?: string | null, title?: string | null, keywords?: string | null } | null, system?: { __typename?: 'EntrySystemField', content_type_uid?: string | null, locale?: string | null, uid?: string | null } | null } | null } | null> | null } | null } | null } | { __typename: 'PageMainContentBuckets', buckets?: { __typename?: 'PageMainContentBucketsBlock', title?: string | null, description?: string | null, actions?: Array<{ __typename?: 'PageMainContentBucketsBlockActions', description?: string | null, title?: string | null, iconConnection?: { __typename?: 'SysAssetConnection', edges?: Array<{ __typename?: 'SysAssetEdge', node?: { __typename?: 'SysAsset', url?: string | null, dimension?: { __typename?: 'SysAssetDimension', height?: number | null, width?: number | null } | null } | null } | null> | null } | null, link?: { __typename?: 'Link', title?: string | null, href?: string | null } | null } | null> | null } | null } | { __typename: 'PageMainContentHeroSection', hero_section?: { __typename?: 'PageMainContentHeroSectionBlock', background_color?: string | null, description?: string | null, text_color?: string | null, title?: string | null, hero_image?: { __typename?: 'PageMainContentHeroSectionBlockHeroImage', position?: string | null, imageConnection?: { __typename?: 'SysAssetConnection', edges?: Array<{ __typename?: 'SysAssetEdge', node?: { __typename?: 'SysAsset', url?: string | null, dimension?: { __typename?: 'SysAssetDimension', height?: number | null, width?: number | null } | null } | null } | null> | null } | null } | null, link?: { __typename?: 'Link', title?: string | null, href?: string | null } | null } | null } | { __typename?: 'PageMainContentRichText' } | { __typename: 'PageMainContentSpotlight', spotlight?: { __typename?: 'PageMainContentSpotlightBlock', description?: string | null, title?: string | null, caption?: Array<{ __typename?: 'PageMainContentSpotlightBlockCaption', description?: string | null, title?: string | null, imageConnection?: { __typename?: 'SysAssetConnection', edges?: Array<{ __typename?: 'SysAssetEdge', node?: { __typename?: 'SysAsset', url?: string | null, dimension?: { __typename?: 'SysAssetDimension', height?: number | null, width?: number | null } | null } | null } | null> | null } | null } | null> | null } | null } | null> | null, global_field?: { __typename?: 'Seo', description?: string | null, title?: string | null, keywords?: string | null } | null, system?: { __typename?: 'EntrySystemField', content_type_uid?: string | null, locale?: string | null, uid?: string | null } | null } | null> | null } | null };
 
 export type GetPostByUrlQueryVariables = Exact<{
   url: Scalars['String'];
 }>;
 
 
-export type GetPostByUrlQuery = { __typename?: 'Query', all_blog_article?: { __typename?: 'AllBlogArticle', items?: Array<(
-      { __typename?: 'BlogArticle' }
-      & { ' $fragmentRefs'?: { 'BlogArticlePartsFragment': BlogArticlePartsFragment } }
-    ) | null> | null } | null };
+export type GetPostByUrlQuery = { __typename?: 'Query', all_blog_article?: { __typename?: 'AllBlogArticle', items?: Array<{ __typename?: 'BlogArticle', date?: any | null, title?: string | null, url?: string | null, summary?: string | null, featured_imageConnection?: { __typename?: 'SysAssetConnection', edges?: Array<{ __typename?: 'SysAssetEdge', node?: { __typename?: 'SysAsset', url?: string | null, dimension?: { __typename?: 'SysAssetDimension', height?: number | null, width?: number | null } | null } | null } | null> | null } | null, content?: { __typename?: 'BlogArticleContent', json?: any | null } | null, authorConnection?: { __typename?: 'BlogArticleAuthorConnection', edges?: Array<{ __typename?: 'BlogArticleAuthorEdge', node?: { __typename?: 'Author', title?: string | null, url?: string | null, photoConnection?: { __typename?: 'SysAssetConnection', edges?: Array<{ __typename?: 'SysAssetEdge', node?: { __typename?: 'SysAsset', url?: string | null, dimension?: { __typename?: 'SysAssetDimension', height?: number | null, width?: number | null } | null } | null } | null> | null } | null } | null } | null> | null } | null, global_field?: { __typename?: 'Seo', description?: string | null, title?: string | null, keywords?: string | null } | null, system?: { __typename?: 'EntrySystemField', content_type_uid?: string | null, locale?: string | null, uid?: string | null } | null } | null> | null } | null };
 
 export type GetSettingsByUidQueryVariables = Exact<{
   uid: Scalars['String'];
 }>;
 
 
-export type GetSettingsByUidQuery = { __typename?: 'Query', settings?: { __typename?: 'Settings', copyright?: string | null, site_title?: string | null, logoConnection?: (
-      { __typename?: 'SysAssetConnection' }
-      & { ' $fragmentRefs'?: { 'ImagePartsFragment': ImagePartsFragment } }
-    ) | null, menuConnection?: { __typename?: 'SettingsMenuConnection', edges?: Array<{ __typename?: 'SettingsMenuEdge', node?: { __typename?: 'Menu', title?: string | null, menu_items?: Array<{ __typename?: 'MenuMenuItems', label?: string | null, external_link?: (
-              { __typename?: 'Link' }
-              & { ' $fragmentRefs'?: { 'LinkPartsFragment': LinkPartsFragment } }
-            ) | null, internal_linkConnection?: { __typename?: 'MenuMenuItemsInternalLinkConnection', edges?: Array<{ __typename?: 'MenuMenuItemsInternalLinkEdge', node?: { __typename?: 'Page', title?: string | null, url?: string | null } | null } | null> | null } | null } | null> | null } | null } | null> | null } | null, social_links?: { __typename?: 'SocialLinks', social_links?: Array<{ __typename?: 'SocialLinksSocialLinks', name?: string | null, iconConnection?: (
-          { __typename?: 'SysAssetConnection' }
-          & { ' $fragmentRefs'?: { 'ImagePartsFragment': ImagePartsFragment } }
-        ) | null, link?: (
-          { __typename?: 'Link' }
-          & { ' $fragmentRefs'?: { 'LinkPartsFragment': LinkPartsFragment } }
-        ) | null } | null> | null } | null } | null };
+export type GetSettingsByUidQuery = { __typename?: 'Query', settings?: { __typename?: 'Settings', copyright?: string | null, site_title?: string | null, logoConnection?: { __typename?: 'SysAssetConnection', edges?: Array<{ __typename?: 'SysAssetEdge', node?: { __typename?: 'SysAsset', url?: string | null, dimension?: { __typename?: 'SysAssetDimension', height?: number | null, width?: number | null } | null } | null } | null> | null } | null, menuConnection?: { __typename?: 'SettingsMenuConnection', edges?: Array<{ __typename?: 'SettingsMenuEdge', node?: { __typename?: 'Menu', title?: string | null, menu_items?: Array<{ __typename?: 'MenuMenuItems', label?: string | null, external_link?: { __typename?: 'Link', title?: string | null, href?: string | null } | null, internal_linkConnection?: { __typename?: 'MenuMenuItemsInternalLinkConnection', edges?: Array<{ __typename?: 'MenuMenuItemsInternalLinkEdge', node?: { __typename?: 'Page', title?: string | null, url?: string | null } | null } | null> | null } | null } | null> | null } | null } | null> | null } | null, social_links?: { __typename?: 'SocialLinks', social_links?: Array<{ __typename?: 'SocialLinksSocialLinks', name?: string | null, iconConnection?: { __typename?: 'SysAssetConnection', edges?: Array<{ __typename?: 'SysAssetEdge', node?: { __typename?: 'SysAsset', url?: string | null, dimension?: { __typename?: 'SysAssetDimension', height?: number | null, width?: number | null } | null } | null } | null> | null } | null, link?: { __typename?: 'Link', title?: string | null, href?: string | null } | null } | null> | null } | null } | null };
 
 export const ImagePartsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"imageParts"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SysAssetConnection"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"dimension"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}}]}}]}}]}}]} as unknown as DocumentNode<ImagePartsFragment, unknown>;
 export const LinkPartsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"linkParts"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Link"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"href"}}]}}]} as unknown as DocumentNode<LinkPartsFragment, unknown>;

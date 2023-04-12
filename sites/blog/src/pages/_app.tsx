@@ -62,9 +62,13 @@ export default function BlogApp({ Component, pageProps, settings }: TProps) {
 }
 
 BlogApp.getInitialProps = async (context: AppContext) => {
+  const uid = process.env.CONTENTSTACK_SETTINGS_UID;
+  if (!uid) {
+    throw new Error("Settings uid env var is missing.");
+  }
   const [ctx, settings] = await Promise.all([
     App.getInitialProps(context),
-    getSettings(),
+    getSettings(uid),
   ]);
 
   return {

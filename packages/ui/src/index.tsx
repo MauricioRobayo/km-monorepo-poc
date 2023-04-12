@@ -1,4 +1,4 @@
-export * from "./Button";
+export * from "./button";
 export * from "./actions";
 export * from "./buckets";
 export * from "./button-link";
