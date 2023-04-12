@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client";
+import { linkFragment, imageFragment } from "./fragments";
 
 export const GET_SETTINGS_BY_UID = gql`
   query GetSettingsByUid($uid: String!) {
@@ -6,15 +7,7 @@ export const GET_SETTINGS_BY_UID = gql`
       copyright
       site_title
       logoConnection {
-        edges {
-          node {
-            url
-            dimension {
-              height
-              width
-            }
-          }
-        }
+        ...imageParts
       }
       menuConnection {
         edges {
@@ -24,8 +17,7 @@ export const GET_SETTINGS_BY_UID = gql`
               menu_items {
                 label
                 external_link {
-                  href
-                  title
+                  ...linkParts
                 }
                 internal_linkConnection {
                   edges {
@@ -45,19 +37,10 @@ export const GET_SETTINGS_BY_UID = gql`
       social_links {
         social_links {
           iconConnection {
-            edges {
-              node {
-                url
-                dimension {
-                  height
-                  width
-                }
-              }
-            }
+            ...imageParts
           }
           link {
-            href
-            title
+            ...linkParts
           }
           name
         }

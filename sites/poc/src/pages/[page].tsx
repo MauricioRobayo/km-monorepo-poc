@@ -12,13 +12,7 @@ import {
   SpotlightProps,
 } from "ui";
 import client from "../apollo-client";
-import {
-  BucketsQuery,
-  FeaturedPostsQuery,
-  HeroQuery,
-  SpotlightQuery,
-  GET_PAGE_BY_URL,
-} from "../contentstack/queries";
+import { GetPageByUrlDocument, GetPageByUrlQuery } from "../gql/graphql";
 
 const mainContentComponents: { [key: string]: any } = {
   // PageMainContentRichText: richText,
@@ -80,25 +74,25 @@ export default function Page({
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { data } = await client.query({
-    query: GET_PAGE_BY_URL,
+    query: GetPageByUrlDocument,
     variables: { url: `/${context.query.page ?? ""}` },
   });
   const {
     system,
     main_content: content,
     global_field: metadata,
-  } = data.all_page.items[0];
+  } = data.all_page?.items?.[0] ?? {};
 
   return {
     props: {
       page: {
         system: {
-          contentType: system.content_type_uid,
-          locale: system.locale,
-          pageRef: system.uid,
+          contentType: system?.content_type_uid,
+          locale: system?.locale,
+          pageRef: system?.uid,
         },
         metadata: metadata,
-        content: content.map((block: any) => {
+        content: content?.map((block: any) => {
           return Object.fromEntries(
             Object.entries(block).map(([key, value]) => {
               if (key === "__typename") {
@@ -114,7 +108,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-function mapHeroToHeroProps(data: HeroQuery): HeroProps {
+function mapHeroToHeroProps(data: any): HeroProps {
   return {
     title: data.title,
     description: data.description,
@@ -129,11 +123,11 @@ function mapHeroToHeroProps(data: HeroQuery): HeroProps {
   };
 }
 
-function mapBucketsToBucketsProps(data: BucketsQuery): BucketsProps {
+function mapBucketsToBucketsProps(data: any): BucketsProps {
   return {
     title: data.title,
     description: data.description,
-    buckets: data.actions.map((action) => {
+    buckets: data.actions.map((action: any) => {
       return {
         title: action.title,
         description: action.description,
@@ -147,11 +141,11 @@ function mapBucketsToBucketsProps(data: BucketsQuery): BucketsProps {
   };
 }
 
-function mapBlogToFeaturedPosts(data: FeaturedPostsQuery): FeaturedPostsProps {
+function mapBlogToFeaturedPosts(data: any): FeaturedPostsProps {
   return {
     title: data.title,
     link: data.link,
-    posts: data.referenceConnection.edges.map((post) => ({
+    posts: data.referenceConnection.edges.map((post: any) => ({
       summary: post.node.summary,
       title: post.node.title,
       url: post.node.url,
@@ -163,11 +157,11 @@ function mapBlogToFeaturedPosts(data: FeaturedPostsQuery): FeaturedPostsProps {
   };
 }
 
-function mapSpotlightToSpotlightProps(data: SpotlightQuery): SpotlightProps {
+function mapSpotlightToSpotlightProps(data: any): SpotlightProps {
   return {
     description: data.description,
     title: data.title,
-    highlights: data.caption.map((highlight) => ({
+    highlights: data.caption.map((highlight: any) => ({
       description: highlight.description,
       title: highlight.title,
       image: {
