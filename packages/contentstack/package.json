@@ -12,10 +12,8 @@
   "devDependencies": {
     "@graphql-codegen/cli": "^3.3.0",
     "@graphql-codegen/client-preset": "^3.0.0",
-    "@types/react": "^18.0.22",
     "eslint": "^7.32.0",
     "eslint-config-custom": "*",
-    "react": "^18.2.0",
     "tsconfig": "*",
     "typescript": "^4.5.2"
   },
