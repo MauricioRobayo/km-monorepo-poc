@@ -5,6 +5,7 @@ import Link from "next/link";
 import { GetServerSideProps } from "next/types";
 import client from "../../apollo-client";
 import { GetPostByUrlDocument } from "../../gql/graphql";
+import { getPostByUrl } from "../../contentstack/api";
 
 export interface PostProps {
   page: {
@@ -85,42 +86,11 @@ export default function Post({ page }: PostProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { data } = await client.query({
-    query: GetPostByUrlDocument,
-    variables: { url: `/blog/${context.query.post}` },
-  });
-
-  const post = data.all_blog_article?.items?.[0];
+  const post = await getPostByUrl(`/blog/${context.query.post}`);
 
   return {
     props: {
-      page: {
-        system: {
-          pageRef: post?.system?.uid,
-          contentType: post?.system?.content_type_uid,
-          locale: post?.system?.locale,
-        },
-        metadata: post?.global_field,
-        date: post?.date,
-        image: {
-          dimensions:
-            post?.featured_imageConnection?.edges?.[0]?.node?.dimension,
-          url: post?.featured_imageConnection?.edges?.[0]?.node?.url,
-        },
-        title: post?.title,
-        content: jsonToHtml(data?.all_blog_article?.items?.[0]?.content?.json),
-        author: {
-          name: post?.authorConnection?.edges?.[0]?.node?.title,
-          url: post?.authorConnection?.edges?.[0]?.node?.url,
-          image: {
-            url: post?.authorConnection?.edges?.[0]?.node?.photoConnection
-              ?.edges?.[0]?.node?.url,
-            dimensions:
-              post?.authorConnection?.edges?.[0]?.node?.photoConnection
-                ?.edges?.[0]?.node?.dimension,
-          },
-        },
-      },
+      page: post,
     },
   };
 };

@@ -7,6 +7,7 @@ import {
   GetSettingsByUidDocument,
   GetSettingsByUidQuery,
 } from "../gql/graphql";
+import { getSettings } from "../contentstack/api";
 
 export interface PocSettings {
   copyright: string;
@@ -66,56 +67,13 @@ export default function PocApp({ Component, pageProps, settings }: TProps) {
 }
 
 PocApp.getInitialProps = async (context: AppContext) => {
-  const uid = process.env.CONTENTSTACK_SETTINGS_UID;
-  if (!uid) {
-    throw new Error("Settings uid env var is missing.");
-  }
-  const [ctx, query] = await Promise.all([
+  const [ctx, settings] = await Promise.all([
     App.getInitialProps(context),
-    client.query({
-      query: GetSettingsByUidDocument,
-      variables: { uid },
-    }),
+    getSettings(),
   ]);
 
   return {
     ...ctx,
-    settings: query.data.settings
-      ? mapQueryResultToSettings(query.data.settings)
-      : null,
+    settings,
   };
 };
-
-function mapQueryResultToSettings(
-  settings: NonNullable<GetSettingsByUidQuery["settings"]>
-) {
-  return {
-    copyright: settings.copyright,
-    siteTitle: settings.site_title,
-    logo: {
-      url: settings.logoConnection?.edges?.[0]?.node?.url,
-      dimensions: settings.logoConnection?.edges?.[0]?.node?.dimension,
-    },
-    socialLinks: settings.social_links?.social_links?.map((socialLink) => ({
-      logo: {
-        url: socialLink?.iconConnection?.edges?.[0]?.node?.url,
-        dimensions: socialLink?.iconConnection?.edges?.[0]?.node?.dimension,
-      },
-      name: socialLink?.name,
-      link: socialLink?.link,
-    })),
-    menu: settings.menuConnection?.edges?.[0]?.node?.menu_items?.map(
-      (menuItem) => ({
-        label: menuItem?.label,
-        link: {
-          href:
-            menuItem?.internal_linkConnection?.edges?.[0]?.node?.url ||
-            menuItem?.external_link?.href,
-          title:
-            menuItem?.internal_linkConnection?.edges?.[0]?.node?.title ||
-            menuItem?.external_link?.title,
-        },
-      })
-    ),
-  };
-}

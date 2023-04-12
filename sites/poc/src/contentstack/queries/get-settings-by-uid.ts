@@ -1,5 +1,4 @@
 import { gql } from "@apollo/client";
-import { linkFragment, imageFragment } from "./fragments";
 
 export const GET_SETTINGS_BY_UID = gql`
   query GetSettingsByUid($uid: String!) {

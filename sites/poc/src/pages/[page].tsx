@@ -12,7 +12,8 @@ import {
   SpotlightProps,
 } from "ui";
 import client from "../apollo-client";
-import { GetPageByUrlDocument, GetPageByUrlQuery } from "../gql/graphql";
+import { GetPageByUrlDocument } from "../gql/graphql";
+import { getPageByUrl } from "../contentstack/api";
 
 const mainContentComponents: { [key: string]: any } = {
   // PageMainContentRichText: richText,
@@ -73,37 +74,10 @@ export default function Page({
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { data } = await client.query({
-    query: GetPageByUrlDocument,
-    variables: { url: `/${context.query.page ?? ""}` },
-  });
-  const {
-    system,
-    main_content: content,
-    global_field: metadata,
-  } = data.all_page?.items?.[0] ?? {};
-
+  const page = await getPageByUrl(`/${context.query.page ?? ""}`);
   return {
     props: {
-      page: {
-        system: {
-          contentType: system?.content_type_uid,
-          locale: system?.locale,
-          pageRef: system?.uid,
-        },
-        metadata: metadata,
-        content: content?.map((block: any) => {
-          return Object.fromEntries(
-            Object.entries(block).map(([key, value]) => {
-              if (key === "__typename") {
-                return ["type", value];
-              } else {
-                return ["content", value];
-              }
-            })
-          );
-        }),
-      },
+      page,
     },
   };
 };

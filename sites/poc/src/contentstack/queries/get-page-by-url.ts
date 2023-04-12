@@ -1,10 +1,4 @@
 import { gql } from "@apollo/client";
-import {
-  imageFragment,
-  linkFragment,
-  seoFragment,
-  systemFragment,
-} from "./fragments";
 
 export const GET_PAGE_BY_URL = gql`
   query GetPageByUrl($url: String!) {
