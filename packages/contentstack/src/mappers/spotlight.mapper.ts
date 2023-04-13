@@ -1,15 +1,7 @@
+import type { Spotlight } from "types";
 import type { PageMainContentSpotlightBlock } from "../__generated__/graphql";
-import { Image, imageMapper } from "./image.mapper";
+import { imageMapper } from "./image.mapper";
 
-export interface Spotlight {
-  title: string;
-  description: string;
-  highlights: Array<{
-    title: string;
-    description: string;
-    image: Image;
-  }>;
-}
 export function spotlightMapper(
   data: PageMainContentSpotlightBlock
 ): Spotlight {

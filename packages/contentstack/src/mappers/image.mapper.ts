@@ -1,12 +1,6 @@
 import { SysAssetConnection } from "../__generated__/graphql";
+import type { Image } from "types";
 
-export interface Image {
-  url: string;
-  dimensions: {
-    width: number;
-    height: number;
-  };
-}
 export function imageMapper(
   sysAssetConnection?: SysAssetConnection | null
 ): Image {

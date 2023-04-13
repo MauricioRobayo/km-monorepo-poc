@@ -1,20 +1,8 @@
+import type { Blog } from "types";
 import { PageMainContentBlogBlock } from "../__generated__/graphql";
-import { Image, imageMapper } from "./image.mapper";
+import { imageMapper } from "./image.mapper";
 import { linkMapper } from "./link.mapper";
 
-export interface Blog {
-  title: string;
-  link: {
-    href: string;
-    title: string;
-  };
-  posts: Array<{
-    title: string;
-    url: string;
-    summary: string;
-    image: Image;
-  }>;
-}
 export function blogMapper(data: PageMainContentBlogBlock): Blog {
   return {
     title: data?.title ?? "",

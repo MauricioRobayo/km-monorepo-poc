@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ButtonLink } from "./button-link";
-import { type Hero as HeroProps } from "contentstack/src/mappers/hero.mapper";
+import { type Hero as HeroProps } from "types";
 
 export function Hero({
   backgroundColor,

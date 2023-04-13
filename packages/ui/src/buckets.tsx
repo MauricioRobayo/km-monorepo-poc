@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { type Buckets as BucketsProps } from "contentstack/src/mappers/buckets.mapper";
+import { type Buckets as BucketsProps } from "types";
 
 export function Buckets({ title, description, buckets }: BucketsProps) {
   return (

@@ -1,20 +1,8 @@
 import { PageMainContentHeroSectionBlock } from "../__generated__/graphql";
-import { Image, imageMapper } from "./image.mapper";
+import { imageMapper } from "./image.mapper";
 import { linkMapper } from "./link.mapper";
+import type { Hero } from "types";
 
-export interface Hero {
-  backgroundColor: string;
-  description: string;
-  image: Image & {
-    position: "Left" | "Right";
-  };
-  link?: {
-    href: string;
-    title: string;
-  };
-  textColor: string;
-  title: string;
-}
 export function heroMapper(data: PageMainContentHeroSectionBlock): Hero {
   return {
     title: data?.title ?? "",

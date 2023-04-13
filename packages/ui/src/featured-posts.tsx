@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ButtonLink } from "./button-link";
 import Image from "next/image";
-import { type Blog as FeaturedPostProps } from "contentstack/src/mappers/blog.mapper";
+import { type Blog as FeaturedPostProps } from "types";
 
 export function FeaturedPosts({ title, link, posts }: FeaturedPostProps) {
   return (

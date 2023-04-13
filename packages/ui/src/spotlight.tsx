@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { type Spotlight as SpotlightProps } from "contentstack/src/mappers/spotlight.mapper";
+import { type Spotlight as SpotlightProps } from "types";
 
 export function Spotlight({ title, description, highlights }: SpotlightProps) {
   return (
