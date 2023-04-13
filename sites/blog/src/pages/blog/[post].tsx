@@ -1,51 +1,24 @@
+import { getPostByUrl } from "contentstack";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { GetServerSideProps } from "next/types";
-import { getPostByUrl } from "contentstack";
+import {
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+} from "next/types";
 
-export interface PostProps {
-  page: {
-    system: {
-      pageRef: string;
-      contentType: string;
-      locale: string;
-    };
-    metadata: {
-      title: string;
-      description: string;
-    };
-    date: string;
-    title: string;
-    content: string;
-    image: {
-      url: string;
-      dimensions: {
-        width: number;
-        height: number;
-      };
-    };
-    author: {
-      name: string;
-      url: string;
-      image: {
-        url: string;
-        dimensions: {
-          width: number;
-          height: number;
-        };
-      };
-    };
-  };
-}
-export default function Post({ page }: PostProps) {
+export default function Post({
+  page,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { date, title, content, image, author, metadata } = page;
   return (
     <>
-      <Head>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-      </Head>
+      {metadata && (
+        <Head>
+          <title>{metadata.title}</title>
+          <meta name="description" content={metadata.description ?? ""} />
+        </Head>
+      )}
       <div className="p-16 m-auto max-w-screen-lg">
         <div className="text-4xl font-bold">{title}</div>
         <div className="text-sm">
@@ -60,7 +33,7 @@ export default function Post({ page }: PostProps) {
               <Image
                 className="w-8 h-8"
                 src={author.image.url}
-                alt={author.name}
+                alt={author.name ?? ""}
                 {...author.image.dimensions}
               />
               {author.name}
@@ -70,7 +43,7 @@ export default function Post({ page }: PostProps) {
         <Image
           className="my-8 w-full"
           src={image.url}
-          alt={title}
+          alt={title ?? ""}
           {...image.dimensions}
         />
         <article
@@ -82,7 +55,7 @@ export default function Post({ page }: PostProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const post = await getPostByUrl(`/blog/${context.query.post}`);
 
   return {
@@ -90,4 +63,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       page: post,
     },
   };
-};
+}

@@ -7,6 +7,8 @@ import {
 } from "./__generated__/graphql";
 import { imageMapper } from "./mappers/image.mapper";
 import { dataMappers } from "./mappers";
+import type { Settings } from "types";
+import { linkMapper } from "./mappers/link.mapper";
 
 export async function getPageByUrl(url: string) {
   const { data } = await client.query({
@@ -105,7 +107,7 @@ export async function getPostByUrl(url: string) {
   };
 }
 
-export async function getSettings(uid: string) {
+export async function getSettings(uid: string): Promise<Settings> {
   const { data } = await client.query({
     query: GetSettingsByUidDocument,
     variables: { uid },
@@ -118,26 +120,30 @@ export async function getSettings(uid: string) {
   }
 
   return {
-    copyright: settings.copyright,
-    siteTitle: settings.site_title,
+    copyright: settings.copyright ?? "",
+    siteTitle: settings.site_title ?? "",
     logo: imageMapper(settings.logoConnection),
-    socialLinks: settings.social_links?.social_links?.map((socialLink) => ({
-      logo: imageMapper(socialLink?.iconConnection),
-      name: socialLink?.name,
-      link: socialLink?.link,
-    })),
-    menu: settings.menuConnection?.edges?.[0]?.node?.menu_items?.map(
-      (menuItem) => ({
-        label: menuItem?.label,
-        link: {
-          href:
-            menuItem?.internal_linkConnection?.edges?.[0]?.node?.url ||
-            menuItem?.external_link?.href,
-          title:
-            menuItem?.internal_linkConnection?.edges?.[0]?.node?.title ||
-            menuItem?.external_link?.title,
-        },
-      })
-    ),
+    socialLinks:
+      settings.social_links?.social_links?.map((socialLink) => ({
+        logo: imageMapper(socialLink?.iconConnection),
+        name: socialLink?.name ?? "",
+        link: linkMapper(socialLink?.link),
+      })) ?? [],
+    menu:
+      settings.menuConnection?.edges?.[0]?.node?.menu_items?.map(
+        (menuItem) => ({
+          label: menuItem?.label ?? "",
+          link: {
+            href:
+              menuItem?.internal_linkConnection?.edges?.[0]?.node?.url ||
+              menuItem?.external_link?.href ||
+              "",
+            title:
+              menuItem?.internal_linkConnection?.edges?.[0]?.node?.title ||
+              menuItem?.external_link?.title ||
+              "",
+          },
+        })
+      ) ?? [],
   };
 }

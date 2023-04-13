@@ -4,3 +4,4 @@ export type * from "./image";
 export type * from "./link";
 export type * from "./hero";
 export type * from "./spotlight";
+export type * from "./settings";

@@ -3,42 +3,10 @@ import App, { AppContext } from "next/app";
 import { getSettings } from "contentstack";
 import { Footer, Header } from "ui";
 import "../styles/globals.css";
-
-export interface PocSettings {
-  copyright: string;
-  siteTitle: string;
-  logo: {
-    url: string;
-    dimensions: {
-      width: number;
-      height: number;
-    };
-  };
-  menu: Array<{
-    label: string;
-    link: {
-      href: string;
-      title: string;
-    };
-  }>;
-  socialLinks: Array<{
-    name: string;
-    logo: {
-      url: string;
-      dimensions: {
-        width: number;
-        height: number;
-      };
-    };
-    link: {
-      href: string;
-      title: string;
-    };
-  }>;
-}
+import type { Settings } from "types";
 
 type TProps = Pick<AppProps, "Component" | "pageProps"> & {
-  settings: PocSettings;
+  settings: Settings;
 };
 
 export default function BlogApp({ Component, pageProps, settings }: TProps) {
