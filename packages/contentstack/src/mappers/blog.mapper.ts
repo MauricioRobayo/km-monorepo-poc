@@ -2,7 +2,7 @@ import { PageMainContentBlogBlock } from "../__generated__/graphql";
 import { Image, imageMapper } from "./image.mapper";
 import { linkMapper } from "./link.mapper";
 
-export interface FeaturedPosts {
+export interface Blog {
   title: string;
   link: {
     href: string;
@@ -15,7 +15,7 @@ export interface FeaturedPosts {
     image: Image;
   }>;
 }
-export function mapBlogToFeaturedPosts(data: PageMainContentBlogBlock): FeaturedPosts {
+export function blogMapper(data: PageMainContentBlogBlock): Blog {
   return {
     title: data?.title ?? "",
     link: linkMapper(data?.link),

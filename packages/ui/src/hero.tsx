@@ -1,24 +1,7 @@
 import Image from "next/image";
 import { ButtonLink } from "./button-link";
+import { type Hero as HeroProps } from "contentstack/src/mappers/hero.mapper";
 
-export interface HeroProps {
-  backgroundColor: string;
-  description: string;
-  image: {
-    url: string;
-    position: "Left" | "Right";
-    dimensions: {
-      width: number;
-      height: number;
-    };
-  };
-  link?: {
-    href: string;
-    title: string;
-  };
-  textColor: string;
-  title: string;
-}
 export function Hero({
   backgroundColor,
   description,

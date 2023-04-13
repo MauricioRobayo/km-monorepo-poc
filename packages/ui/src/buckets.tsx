@@ -1,25 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { type Buckets as BucketsProps } from "contentstack/src/mappers/buckets.mapper";
 
-export interface BucketsProps {
-  title: string;
-  description: string;
-  buckets: Array<{
-    title: string;
-    description: string;
-    icon: {
-      url: string;
-      dimensions: {
-        height: number;
-        width: number;
-      };
-    };
-    link: {
-      title: string;
-      href: string;
-    };
-  }>;
-}
 export function Buckets({ title, description, buckets }: BucketsProps) {
   return (
     <div className="bg-gray-100 p-16">

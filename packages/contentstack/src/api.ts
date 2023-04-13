@@ -4,45 +4,9 @@ import {
   GetPageByUrlDocument,
   GetPostByUrlDocument,
   GetSettingsByUidDocument,
-  SysAssetConnection,
 } from "./__generated__/graphql";
-
-export async function getSettings(uid: string) {
-  const { data } = await client.query({
-    query: GetSettingsByUidDocument,
-    variables: { uid },
-  });
-
-  const { settings } = data;
-
-  if (!settings) {
-    throw new Error("Unable to get settings");
-  }
-
-  return {
-    copyright: settings.copyright,
-    siteTitle: settings.site_title,
-    logo: mapSysAssetConnectionToImage(settings.logoConnection),
-    socialLinks: settings.social_links?.social_links?.map((socialLink) => ({
-      logo: mapSysAssetConnectionToImage(socialLink?.iconConnection),
-      name: socialLink?.name,
-      link: socialLink?.link,
-    })),
-    menu: settings.menuConnection?.edges?.[0]?.node?.menu_items?.map(
-      (menuItem) => ({
-        label: menuItem?.label,
-        link: {
-          href:
-            menuItem?.internal_linkConnection?.edges?.[0]?.node?.url ||
-            menuItem?.external_link?.href,
-          title:
-            menuItem?.internal_linkConnection?.edges?.[0]?.node?.title ||
-            menuItem?.external_link?.title,
-        },
-      })
-    ),
-  };
-}
+import { imageMapper } from "./mappers/image.mapper";
+import { dataMappers } from "./mappers";
 
 export async function getPageByUrl(url: string) {
   const { data } = await client.query({
@@ -62,16 +26,52 @@ export async function getPageByUrl(url: string) {
       pageRef: system?.uid,
     },
     metadata: metadata,
-    content: content?.map((block: any) => {
-      return Object.fromEntries(
-        Object.entries(block).map(([key, value]) => {
-          if (key === "__typename") {
-            return ["type", value];
-          } else {
-            return ["content", value];
-          }
-        })
-      );
+    content: content?.map((block) => {
+      const type = block?.__typename;
+      if (!type) {
+        return {
+          type: null,
+          content: null,
+        };
+      }
+      switch (type) {
+        case "PageMainContentActions":
+          return {
+            type,
+            content: dataMappers[type]?.(block.actions) ?? block.actions,
+          };
+        case "PageMainContentBlog":
+          return {
+            type,
+            content: dataMappers[type]?.(block.blog) ?? block.blog,
+          };
+        case "PageMainContentBuckets":
+          return {
+            type,
+            content: dataMappers[type]?.(block.buckets) ?? block.buckets,
+          };
+        case "PageMainContentHeroSection":
+          return {
+            type,
+            content:
+              dataMappers[type]?.(block.hero_section) ?? block.hero_section,
+          };
+        case "PageMainContentSpotlight":
+          return {
+            type,
+            content: dataMappers[type]?.(block.spotlight) ?? block.spotlight,
+          };
+        case "PageMainContentRichText":
+          return {
+            type,
+            content: null,
+          };
+        default:
+          return {
+            type: null,
+            content: null,
+          };
+      }
     }),
   };
 }
@@ -92,25 +92,52 @@ export async function getPostByUrl(url: string) {
     },
     metadata: post?.global_field,
     date: post?.date,
-    image: mapSysAssetConnectionToImage(post?.featured_imageConnection),
+    image: imageMapper(post?.featured_imageConnection),
     title: post?.title,
     content: jsonToHtml(data?.all_blog_article?.items?.[0]?.content?.json),
     author: {
       name: post?.authorConnection?.edges?.[0]?.node?.title,
       url: post?.authorConnection?.edges?.[0]?.node?.url,
-      image: mapSysAssetConnectionToImage(
+      image: imageMapper(
         post?.authorConnection?.edges?.[0]?.node?.photoConnection
       ),
     },
   };
 }
 
-function mapSysAssetConnectionToImage(
-  sysAssetConnection?: SysAssetConnection | null
-) {
-  const node = sysAssetConnection?.edges?.[0]?.node;
+export async function getSettings(uid: string) {
+  const { data } = await client.query({
+    query: GetSettingsByUidDocument,
+    variables: { uid },
+  });
+
+  const { settings } = data;
+
+  if (!settings) {
+    throw new Error("Unable to get settings");
+  }
+
   return {
-    url: node?.url,
-    dimensions: node?.dimension,
+    copyright: settings.copyright,
+    siteTitle: settings.site_title,
+    logo: imageMapper(settings.logoConnection),
+    socialLinks: settings.social_links?.social_links?.map((socialLink) => ({
+      logo: imageMapper(socialLink?.iconConnection),
+      name: socialLink?.name,
+      link: socialLink?.link,
+    })),
+    menu: settings.menuConnection?.edges?.[0]?.node?.menu_items?.map(
+      (menuItem) => ({
+        label: menuItem?.label,
+        link: {
+          href:
+            menuItem?.internal_linkConnection?.edges?.[0]?.node?.url ||
+            menuItem?.external_link?.href,
+          title:
+            menuItem?.internal_linkConnection?.edges?.[0]?.node?.title ||
+            menuItem?.external_link?.title,
+        },
+      })
+    ),
   };
 }

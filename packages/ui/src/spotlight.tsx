@@ -1,20 +1,6 @@
 import Image from "next/image";
+import { type Spotlight as SpotlightProps } from "contentstack/src/mappers/spotlight.mapper";
 
-export interface SpotlightProps {
-  title: string;
-  description: string;
-  highlights: Array<{
-    title: string;
-    description: string;
-    image: {
-      url: string;
-      dimensions: {
-        width: number;
-        height: number;
-      };
-    };
-  }>;
-}
 export function Spotlight({ title, description, highlights }: SpotlightProps) {
   return (
     <div className="bg-gray-100 p-16">

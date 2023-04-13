@@ -1,27 +1,9 @@
 import Link from "next/link";
 import { ButtonLink } from "./button-link";
 import Image from "next/image";
+import { type Blog as FeaturedPostProps } from "contentstack/src/mappers/blog.mapper";
 
-export interface FeaturedPostsProps {
-  title: string;
-  link: {
-    href: string;
-    title: string;
-  };
-  posts: Array<{
-    title: string;
-    url: string;
-    summary: string;
-    image: {
-      url: string;
-      dimensions: {
-        width: number;
-        height: number;
-      };
-    };
-  }>;
-}
-export function FeaturedPosts({ title, link, posts }: FeaturedPostsProps) {
+export function FeaturedPosts({ title, link, posts }: FeaturedPostProps) {
   return (
     <div className="p-16">
       <div className="max-w-screen-xl justify-center items-center m-auto flex flex-col gap-16">
@@ -31,7 +13,7 @@ export function FeaturedPosts({ title, link, posts }: FeaturedPostsProps) {
         </div>
         <div>
           <div className="grid grid-cols-2 gap-8 max-w-screen-lg">
-            {posts.map(({ title, url, summary, image }) => {
+            {posts?.map(({ title, url, summary, image }) => {
               return (
                 <div key={title} className="border-gray-100 border-2">
                   <Image src={image.url} alt="" {...image.dimensions} />
