@@ -26,7 +26,7 @@ export default function Post({
           <div className="flex items-center gap-2 text-base mt-4">
             by{" "}
             <Link
-              href={author.url}
+              href={author.url ?? ""}
               style={{ color: "#715cdd" }}
               className="flex items-center gap-2"
             >

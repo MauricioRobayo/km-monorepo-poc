@@ -1,0 +1,14 @@
+fragment spotlightFields on PageMainContentSpotlight {
+  __typename
+  spotlight {
+    description
+    title
+    caption {
+      description
+      title
+      imageConnection {
+        ...imageFields
+      }
+    }
+  }
+}

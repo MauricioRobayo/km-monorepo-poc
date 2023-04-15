@@ -19,9 +19,15 @@ const config: CodegenConfig = {
       },
     },
   ],
-  documents: "./src/**/*.ts",
+  documents: ["./src/**/*.{ts,graphql}"],
   generates: {
-    "./src/__generated__/": {
+    "src/__generated__/graphql.schema.json": {
+      plugins: ["introspection"],
+    },
+    "src/__generated__/graphql.schema.graphql": {
+      plugins: ["schema-ast"],
+    },
+    "src/__generated__/": {
       preset: "client",
       plugins: [],
       overwrite: true,

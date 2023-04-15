@@ -1,0 +1,5 @@
+fragment seoFields on Seo {
+  description
+  title
+  keywords
+}

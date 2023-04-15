@@ -1,0 +1,31 @@
+fragment blogArticleFields on BlogArticle {
+  date
+  title
+  url
+  summary
+  featured_imageConnection {
+    ...imageFields
+  }
+  content {
+    json
+  }
+  authorConnection {
+    edges {
+      node {
+        ... on Author {
+          title
+          url
+          photoConnection {
+            ...imageFields
+          }
+        }
+      }
+    }
+  }
+  global_field {
+    ...seoFields
+  }
+  system {
+    ...systemFields
+  }
+}

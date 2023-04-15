@@ -1,0 +1,11 @@
+fragment imageFields on SysAssetConnection {
+  edges {
+    node {
+      url
+      dimension {
+        height
+        width
+      }
+    }
+  }
+}

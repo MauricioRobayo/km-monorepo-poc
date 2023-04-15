@@ -1,0 +1,4 @@
+fragment linkFields on Link {
+  title
+  href
+}

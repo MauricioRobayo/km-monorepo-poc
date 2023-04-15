@@ -1,0 +1,12 @@
+fragment actionsFields on PageMainContentActions {
+  __typename
+  actions {
+    actions {
+      description
+      title
+      link {
+        ...linkFields
+      }
+    }
+  }
+}

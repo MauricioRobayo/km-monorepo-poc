@@ -1,0 +1,2 @@
+schema: "packages/contentstack/src/__generated__/graphql.schema.graphql"
+documents: "packages/contentstack/src/**/*.{graphql,js,ts,jsx,tsx}"

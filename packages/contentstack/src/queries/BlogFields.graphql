@@ -1,0 +1,18 @@
+fragment blogFields on PageMainContentBlog {
+  __typename
+  blog {
+    title
+    link {
+      ...linkFields
+    }
+    referenceConnection(limit: 2) {
+      edges {
+        node {
+          ... on BlogArticle {
+            ...blogArticleFields
+          }
+        }
+      }
+    }
+  }
+}

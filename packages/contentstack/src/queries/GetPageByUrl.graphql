@@ -1,0 +1,31 @@
+query GetPageByUrl($url: String!) {
+  all_page(where: { url: $url }) {
+    items {
+      title
+      url
+      main_content {
+        ... on PageMainContentBuckets {
+          ...bucketsFields
+        }
+        ... on PageMainContentHeroSection {
+          ...heroFields
+        }
+        ... on PageMainContentActions {
+          ...actionsFields
+        }
+        ... on PageMainContentSpotlight {
+          ...spotlightFields
+        }
+        ... on PageMainContentBlog {
+          ...blogFields
+        }
+      }
+      global_field {
+        ...seoFields
+      }
+      system {
+        ...systemFields
+      }
+    }
+  }
+}

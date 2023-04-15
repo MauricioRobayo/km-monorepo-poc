@@ -1,0 +1,1886 @@
+type AllAuthor {
+  items: [Author]
+  total: Int
+}
+
+type AllBlogArticle {
+  items: [BlogArticle]
+  total: Int
+}
+
+type AllBlt7Cd35243Deeac36B {
+  items: [Blt7Cd35243Deeac36B]
+  total: Int
+}
+
+type AllCategory {
+  items: [Category]
+  total: Int
+}
+
+type AllFaq {
+  items: [Faq]
+  total: Int
+}
+
+type AllFooter {
+  items: [Footer]
+  total: Int
+}
+
+type AllMenu {
+  items: [Menu]
+  total: Int
+}
+
+type AllNews {
+  items: [News]
+  total: Int
+}
+
+type AllPage {
+  items: [Page]
+  total: Int
+}
+
+type AllSettings {
+  items: [Settings]
+  total: Int
+}
+
+type AllSysAsset {
+  items: [SysAsset]
+  total: Int
+}
+
+type Author {
+  email: String
+  name: String
+  phone: Float
+  photoConnection: SysAssetConnection
+  system: EntrySystemField
+  title: String
+  url: String
+}
+
+enum AuthorOrderBy {
+  created_at_ASC
+  created_at_DESC
+  updated_at_ASC
+  updated_at_DESC
+}
+
+input AuthorWhere {
+  AND: [AuthorWhere]
+  OR: [AuthorWhere]
+  created_at: DateTime
+  created_at_gt: DateTime
+  created_at_gte: DateTime
+  created_at_in: [DateTime]
+  created_at_lt: DateTime
+  created_at_lte: DateTime
+  created_at_ne: DateTime
+  created_at_nin: [DateTime]
+  created_by: String
+  created_by_in: [String]
+  created_by_ne: String
+  created_by_nin: [String]
+  email: String
+  email_exists: Boolean
+  email_in: [String]
+  email_ne: String
+  email_nin: [String]
+  locale: String
+  locale_exists: Boolean
+  locale_in: [String]
+  locale_ne: String
+  locale_nin: [String]
+  name: String
+  name_exists: Boolean
+  name_in: [String]
+  name_ne: String
+  name_nin: [String]
+  phone: Float
+  phone_exists: Boolean
+  phone_gt: Float
+  phone_gte: Float
+  phone_in: [Float]
+  phone_lt: Float
+  phone_lte: Float
+  phone_ne: Float
+  phone_nin: [Float]
+  photo: SysAssetWhere
+  photo_exists: Boolean
+  publish_details: SystemPublishDetailsWhere
+  tags_in: [String]
+  tags_nin: [String]
+  title: String
+  title_exists: Boolean
+  title_in: [String]
+  title_ne: String
+  title_nin: [String]
+  uid: String
+  uid_exists: Boolean
+  uid_in: [String]
+  uid_ne: String
+  uid_nin: [String]
+  updated_at: DateTime
+  updated_at_gt: DateTime
+  updated_at_gte: DateTime
+  updated_at_in: [DateTime]
+  updated_at_lt: DateTime
+  updated_at_lte: DateTime
+  updated_at_ne: DateTime
+  updated_at_nin: [DateTime]
+  updated_by: String
+  updated_by_in: [String]
+  updated_by_ne: String
+  updated_by_nin: [String]
+  url: String
+  url_exists: Boolean
+  url_in: [String]
+  url_ne: String
+  url_nin: [String]
+  version: Int
+  version_gt: Int
+  version_gte: Int
+  version_in: [Int]
+  version_lt: Int
+  version_lte: Int
+  version_ne: Int
+  version_nin: [Int]
+}
+
+type BlogArticle {
+  authorConnection: BlogArticleAuthorConnection
+  content: BlogArticleContent
+  custom: Float
+  date: DateTime
+  featured_imageConnection: SysAssetConnection
+  global_field: Seo
+  imageConnection: SysAssetConnection
+  related_postsConnection: BlogArticleRelatedPostsConnection
+  summary: String
+  system: EntrySystemField
+  title: String
+  url: String
+}
+
+type BlogArticleAuthorConnection {
+  edges: [BlogArticleAuthorEdge]
+  totalCount: Int
+}
+
+type BlogArticleAuthorEdge {
+  node: BlogArticleAuthorNode
+}
+
+union BlogArticleAuthorNode = Author
+
+input BlogArticleAuthorWhere {
+  MATCH: EvalReferenceEnum
+  author: AuthorWhere
+}
+
+type BlogArticleContent {
+  embedded_itemsConnection(limit: Int = 100, skip: Int = 0): BlogArticleContentEmbeddedItemsConnection
+  json: JSON
+}
+
+type BlogArticleContentEmbeddedItemsConnection {
+  edges: [BlogArticleContentEmbeddedItemsEdge]
+  totalCount: Int
+}
+
+type BlogArticleContentEmbeddedItemsEdge {
+  node: BlogArticleContentEmbeddedItemsNode
+}
+
+union BlogArticleContentEmbeddedItemsNode = SysAsset
+
+enum BlogArticleOrderBy {
+  created_at_ASC
+  created_at_DESC
+  updated_at_ASC
+  updated_at_DESC
+}
+
+type BlogArticleRelatedPostsConnection {
+  edges: [BlogArticleRelatedPostsEdge]
+  totalCount: Int
+}
+
+type BlogArticleRelatedPostsEdge {
+  node: BlogArticleRelatedPostsNode
+}
+
+union BlogArticleRelatedPostsNode = BlogArticle
+
+input BlogArticleRelatedPostsWhere {
+  MATCH: EvalReferenceEnum
+  blog_article: BlogArticleWhere
+}
+
+input BlogArticleWhere {
+  AND: [BlogArticleWhere]
+  OR: [BlogArticleWhere]
+  author: BlogArticleAuthorWhere
+  author_exists: Boolean
+  content: JSON
+  content_exists: Boolean
+  created_at: DateTime
+  created_at_gt: DateTime
+  created_at_gte: DateTime
+  created_at_in: [DateTime]
+  created_at_lt: DateTime
+  created_at_lte: DateTime
+  created_at_ne: DateTime
+  created_at_nin: [DateTime]
+  created_by: String
+  created_by_in: [String]
+  created_by_ne: String
+  created_by_nin: [String]
+  custom: Float
+  custom_exists: Boolean
+  custom_gt: Float
+  custom_gte: Float
+  custom_in: [Float]
+  custom_lt: Float
+  custom_lte: Float
+  custom_ne: Float
+  custom_nin: [Float]
+  date: DateTime
+  date_exists: Boolean
+  date_gt: DateTime
+  date_gte: DateTime
+  date_in: [DateTime]
+  date_lt: DateTime
+  date_lte: DateTime
+  date_ne: DateTime
+  date_nin: [DateTime]
+  featured_image: SysAssetWhere
+  featured_image_exists: Boolean
+  global_field: SeoWhere
+  global_field_exists: Boolean
+  image: SysAssetWhere
+  image_exists: Boolean
+  locale: String
+  locale_exists: Boolean
+  locale_in: [String]
+  locale_ne: String
+  locale_nin: [String]
+  publish_details: SystemPublishDetailsWhere
+  related_posts: BlogArticleRelatedPostsWhere
+  related_posts_exists: Boolean
+  summary: String
+  summary_exists: Boolean
+  summary_in: [String]
+  summary_ne: String
+  summary_nin: [String]
+  tags_in: [String]
+  tags_nin: [String]
+  title: String
+  title_exists: Boolean
+  title_in: [String]
+  title_ne: String
+  title_nin: [String]
+  uid: String
+  uid_exists: Boolean
+  uid_in: [String]
+  uid_ne: String
+  uid_nin: [String]
+  updated_at: DateTime
+  updated_at_gt: DateTime
+  updated_at_gte: DateTime
+  updated_at_in: [DateTime]
+  updated_at_lt: DateTime
+  updated_at_lte: DateTime
+  updated_at_ne: DateTime
+  updated_at_nin: [DateTime]
+  updated_by: String
+  updated_by_in: [String]
+  updated_by_ne: String
+  updated_by_nin: [String]
+  url: String
+  url_exists: Boolean
+  url_in: [String]
+  url_ne: String
+  url_nin: [String]
+  version: Int
+  version_gt: Int
+  version_gte: Int
+  version_in: [Int]
+  version_lt: Int
+  version_lte: Int
+  version_ne: Int
+  version_nin: [Int]
+}
+
+type Blt7Cd35243Deeac36B {
+  featured_imageConnection: SysAssetConnection
+  json_rte: Blt7Cd35243Deeac36BJsonRte
+  system: EntrySystemField
+  title: String
+  url: String
+}
+
+type Blt7Cd35243Deeac36BJsonRte {
+  embedded_itemsConnection(limit: Int = 100, skip: Int = 0): Blt7Cd35243Deeac36BJsonRteEmbeddedItemsConnection
+  json: JSON
+}
+
+type Blt7Cd35243Deeac36BJsonRteEmbeddedItemsConnection {
+  edges: [Blt7Cd35243Deeac36BJsonRteEmbeddedItemsEdge]
+  totalCount: Int
+}
+
+type Blt7Cd35243Deeac36BJsonRteEmbeddedItemsEdge {
+  node: Blt7Cd35243Deeac36BJsonRteEmbeddedItemsNode
+}
+
+union Blt7Cd35243Deeac36BJsonRteEmbeddedItemsNode = SysAsset
+
+enum Blt7Cd35243Deeac36BOrderBy {
+  created_at_ASC
+  created_at_DESC
+  updated_at_ASC
+  updated_at_DESC
+}
+
+input Blt7Cd35243Deeac36BWhere {
+  AND: [Blt7Cd35243Deeac36BWhere]
+  OR: [Blt7Cd35243Deeac36BWhere]
+  created_at: DateTime
+  created_at_gt: DateTime
+  created_at_gte: DateTime
+  created_at_in: [DateTime]
+  created_at_lt: DateTime
+  created_at_lte: DateTime
+  created_at_ne: DateTime
+  created_at_nin: [DateTime]
+  created_by: String
+  created_by_in: [String]
+  created_by_ne: String
+  created_by_nin: [String]
+  featured_image: SysAssetWhere
+  featured_image_exists: Boolean
+  json_rte: JSON
+  json_rte_exists: Boolean
+  locale: String
+  locale_exists: Boolean
+  locale_in: [String]
+  locale_ne: String
+  locale_nin: [String]
+  publish_details: SystemPublishDetailsWhere
+  tags_in: [String]
+  tags_nin: [String]
+  title: String
+  title_exists: Boolean
+  title_in: [String]
+  title_ne: String
+  title_nin: [String]
+  uid: String
+  uid_exists: Boolean
+  uid_in: [String]
+  uid_ne: String
+  uid_nin: [String]
+  updated_at: DateTime
+  updated_at_gt: DateTime
+  updated_at_gte: DateTime
+  updated_at_in: [DateTime]
+  updated_at_lt: DateTime
+  updated_at_lte: DateTime
+  updated_at_ne: DateTime
+  updated_at_nin: [DateTime]
+  updated_by: String
+  updated_by_in: [String]
+  updated_by_ne: String
+  updated_by_nin: [String]
+  url: String
+  url_exists: Boolean
+  url_in: [String]
+  url_ne: String
+  url_nin: [String]
+  version: Int
+  version_gt: Int
+  version_gte: Int
+  version_in: [Int]
+  version_lt: Int
+  version_lte: Int
+  version_ne: Int
+  version_nin: [Int]
+}
+
+type Category {
+  system: EntrySystemField
+  title: String
+}
+
+enum CategoryOrderBy {
+  created_at_ASC
+  created_at_DESC
+  updated_at_ASC
+  updated_at_DESC
+}
+
+input CategoryWhere {
+  AND: [CategoryWhere]
+  OR: [CategoryWhere]
+  created_at: DateTime
+  created_at_gt: DateTime
+  created_at_gte: DateTime
+  created_at_in: [DateTime]
+  created_at_lt: DateTime
+  created_at_lte: DateTime
+  created_at_ne: DateTime
+  created_at_nin: [DateTime]
+  created_by: String
+  created_by_in: [String]
+  created_by_ne: String
+  created_by_nin: [String]
+  locale: String
+  locale_exists: Boolean
+  locale_in: [String]
+  locale_ne: String
+  locale_nin: [String]
+  publish_details: SystemPublishDetailsWhere
+  tags_in: [String]
+  tags_nin: [String]
+  title: String
+  title_exists: Boolean
+  title_in: [String]
+  title_ne: String
+  title_nin: [String]
+  uid: String
+  uid_exists: Boolean
+  uid_in: [String]
+  uid_ne: String
+  uid_nin: [String]
+  updated_at: DateTime
+  updated_at_gt: DateTime
+  updated_at_gte: DateTime
+  updated_at_in: [DateTime]
+  updated_at_lt: DateTime
+  updated_at_lte: DateTime
+  updated_at_ne: DateTime
+  updated_at_nin: [DateTime]
+  updated_by: String
+  updated_by_in: [String]
+  updated_by_ne: String
+  updated_by_nin: [String]
+  version: Int
+  version_gt: Int
+  version_gte: Int
+  version_in: [Int]
+  version_lt: Int
+  version_lte: Int
+  version_ne: Int
+  version_nin: [Int]
+}
+
+"""
+This field accepts both ISODateString and ISODateTimeStringexample: 1992-08-14 or 1992-08-14T03:42:00.000Z
+"""
+scalar DateTime
+
+type EntrySystemField {
+  branch: String
+  content_type_uid: String
+  created_at: DateTime
+  created_by: String
+  extensionConnection(limit: Int = 25, skip: Int = 0): SysExtensionConnection
+  locale: String
+  publish_details: SystemPublishDetails
+  tags: [String]
+  uid: String
+  updated_at: DateTime
+  updated_by: String
+  version: Int
+}
+
+enum EvalReferenceEnum {
+  ALL
+  ANY
+}
+
+type Faq {
+  faq: [FaqFaq]
+  system: EntrySystemField
+  title: String
+}
+
+type FaqFaq {
+  answer: String
+  question: String
+}
+
+input FaqFaqWhere {
+  answer: String
+  answer_exists: Boolean
+  answer_in: [String]
+  answer_ne: String
+  answer_nin: [String]
+  question: String
+  question_exists: Boolean
+  question_in: [String]
+  question_ne: String
+  question_nin: [String]
+}
+
+enum FaqOrderBy {
+  created_at_ASC
+  created_at_DESC
+  updated_at_ASC
+  updated_at_DESC
+}
+
+input FaqWhere {
+  AND: [FaqWhere]
+  OR: [FaqWhere]
+  created_at: DateTime
+  created_at_gt: DateTime
+  created_at_gte: DateTime
+  created_at_in: [DateTime]
+  created_at_lt: DateTime
+  created_at_lte: DateTime
+  created_at_ne: DateTime
+  created_at_nin: [DateTime]
+  created_by: String
+  created_by_in: [String]
+  created_by_ne: String
+  created_by_nin: [String]
+  faq: FaqFaqWhere
+  faq_exists: Boolean
+  locale: String
+  locale_exists: Boolean
+  locale_in: [String]
+  locale_ne: String
+  locale_nin: [String]
+  publish_details: SystemPublishDetailsWhere
+  tags_in: [String]
+  tags_nin: [String]
+  title: String
+  title_exists: Boolean
+  title_in: [String]
+  title_ne: String
+  title_nin: [String]
+  uid: String
+  uid_exists: Boolean
+  uid_in: [String]
+  uid_ne: String
+  uid_nin: [String]
+  updated_at: DateTime
+  updated_at_gt: DateTime
+  updated_at_gte: DateTime
+  updated_at_in: [DateTime]
+  updated_at_lt: DateTime
+  updated_at_lte: DateTime
+  updated_at_ne: DateTime
+  updated_at_nin: [DateTime]
+  updated_by: String
+  updated_by_in: [String]
+  updated_by_ne: String
+  updated_by_nin: [String]
+  version: Int
+  version_gt: Int
+  version_gte: Int
+  version_in: [Int]
+  version_lt: Int
+  version_lte: Int
+  version_ne: Int
+  version_nin: [Int]
+}
+
+type Footer {
+  copyright: String
+  referenceConnection: FooterReferenceConnection
+  social_links: SocialLinks
+  system: EntrySystemField
+  title: String
+}
+
+enum FooterOrderBy {
+  created_at_ASC
+  created_at_DESC
+  updated_at_ASC
+  updated_at_DESC
+}
+
+type FooterReferenceConnection {
+  edges: [FooterReferenceEdge]
+  totalCount: Int
+}
+
+type FooterReferenceEdge {
+  node: FooterReferenceNode
+}
+
+union FooterReferenceNode = Menu
+
+input FooterReferenceWhere {
+  MATCH: EvalReferenceEnum
+  menu: MenuWhere
+}
+
+input FooterWhere {
+  AND: [FooterWhere]
+  OR: [FooterWhere]
+  copyright: String
+  copyright_exists: Boolean
+  copyright_in: [String]
+  copyright_ne: String
+  copyright_nin: [String]
+  created_at: DateTime
+  created_at_gt: DateTime
+  created_at_gte: DateTime
+  created_at_in: [DateTime]
+  created_at_lt: DateTime
+  created_at_lte: DateTime
+  created_at_ne: DateTime
+  created_at_nin: [DateTime]
+  created_by: String
+  created_by_in: [String]
+  created_by_ne: String
+  created_by_nin: [String]
+  locale: String
+  locale_exists: Boolean
+  locale_in: [String]
+  locale_ne: String
+  locale_nin: [String]
+  publish_details: SystemPublishDetailsWhere
+  reference: FooterReferenceWhere
+  reference_exists: Boolean
+  social_links: SocialLinksWhere
+  social_links_exists: Boolean
+  tags_in: [String]
+  tags_nin: [String]
+  title: String
+  title_exists: Boolean
+  title_in: [String]
+  title_ne: String
+  title_nin: [String]
+  uid: String
+  uid_exists: Boolean
+  uid_in: [String]
+  uid_ne: String
+  uid_nin: [String]
+  updated_at: DateTime
+  updated_at_gt: DateTime
+  updated_at_gte: DateTime
+  updated_at_in: [DateTime]
+  updated_at_lt: DateTime
+  updated_at_lte: DateTime
+  updated_at_ne: DateTime
+  updated_at_nin: [DateTime]
+  updated_by: String
+  updated_by_in: [String]
+  updated_by_ne: String
+  updated_by_nin: [String]
+  version: Int
+  version_gt: Int
+  version_gte: Int
+  version_in: [Int]
+  version_lt: Int
+  version_lte: Int
+  version_ne: Int
+  version_nin: [Int]
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+type Link {
+  href: String
+  title: String
+}
+
+input LinkWhere {
+  href: String
+  href_exists: Boolean
+  href_in: [String]
+  href_ne: String
+  href_nin: [String]
+  title: String
+  title_exists: Boolean
+  title_in: [String]
+  title_ne: String
+  title_nin: [String]
+}
+
+type Menu {
+  menu_items: [MenuMenuItems]
+  system: EntrySystemField
+  title: String
+}
+
+type MenuMenuItems {
+  external_link: Link
+  internal_linkConnection: MenuMenuItemsInternalLinkConnection
+  label: String
+  menu_level_2: [MenuMenuItemsMenuLevel2]
+}
+
+type MenuMenuItemsInternalLinkConnection {
+  edges: [MenuMenuItemsInternalLinkEdge]
+  totalCount: Int
+}
+
+type MenuMenuItemsInternalLinkEdge {
+  node: MenuMenuItemsInternalLinkNode
+}
+
+union MenuMenuItemsInternalLinkNode = Page
+
+input MenuMenuItemsInternalLinkWhere {
+  MATCH: EvalReferenceEnum
+  page: PageWhere
+}
+
+type MenuMenuItemsMenuLevel2 {
+  external_link: Link
+  internal_linkConnection: MenuMenuItemsMenuLevel2InternalLinkConnection
+  label: String
+}
+
+type MenuMenuItemsMenuLevel2InternalLinkConnection {
+  edges: [MenuMenuItemsMenuLevel2InternalLinkEdge]
+  totalCount: Int
+}
+
+type MenuMenuItemsMenuLevel2InternalLinkEdge {
+  node: MenuMenuItemsMenuLevel2InternalLinkNode
+}
+
+union MenuMenuItemsMenuLevel2InternalLinkNode = BlogArticle
+
+input MenuMenuItemsMenuLevel2InternalLinkWhere {
+  MATCH: EvalReferenceEnum
+  blog_article: BlogArticleWhere
+}
+
+input MenuMenuItemsMenuLevel2Where {
+  external_link: LinkWhere
+  external_link_exists: Boolean
+  internal_link: MenuMenuItemsMenuLevel2InternalLinkWhere
+  internal_link_exists: Boolean
+  label: String
+  label_exists: Boolean
+  label_in: [String]
+  label_ne: String
+  label_nin: [String]
+}
+
+input MenuMenuItemsWhere {
+  external_link: LinkWhere
+  external_link_exists: Boolean
+  internal_link: MenuMenuItemsInternalLinkWhere
+  internal_link_exists: Boolean
+  label: String
+  label_exists: Boolean
+  label_in: [String]
+  label_ne: String
+  label_nin: [String]
+  menu_level_2: MenuMenuItemsMenuLevel2Where
+  menu_level_2_exists: Boolean
+}
+
+enum MenuOrderBy {
+  created_at_ASC
+  created_at_DESC
+  updated_at_ASC
+  updated_at_DESC
+}
+
+input MenuWhere {
+  AND: [MenuWhere]
+  OR: [MenuWhere]
+  created_at: DateTime
+  created_at_gt: DateTime
+  created_at_gte: DateTime
+  created_at_in: [DateTime]
+  created_at_lt: DateTime
+  created_at_lte: DateTime
+  created_at_ne: DateTime
+  created_at_nin: [DateTime]
+  created_by: String
+  created_by_in: [String]
+  created_by_ne: String
+  created_by_nin: [String]
+  locale: String
+  locale_exists: Boolean
+  locale_in: [String]
+  locale_ne: String
+  locale_nin: [String]
+  menu_items: MenuMenuItemsWhere
+  menu_items_exists: Boolean
+  publish_details: SystemPublishDetailsWhere
+  tags_in: [String]
+  tags_nin: [String]
+  title: String
+  title_exists: Boolean
+  title_in: [String]
+  title_ne: String
+  title_nin: [String]
+  uid: String
+  uid_exists: Boolean
+  uid_in: [String]
+  uid_ne: String
+  uid_nin: [String]
+  updated_at: DateTime
+  updated_at_gt: DateTime
+  updated_at_gte: DateTime
+  updated_at_in: [DateTime]
+  updated_at_lt: DateTime
+  updated_at_lte: DateTime
+  updated_at_ne: DateTime
+  updated_at_nin: [DateTime]
+  updated_by: String
+  updated_by_in: [String]
+  updated_by_ne: String
+  updated_by_nin: [String]
+  version: Int
+  version_gt: Int
+  version_gte: Int
+  version_in: [Int]
+  version_lt: Int
+  version_lte: Int
+  version_ne: Int
+  version_nin: [Int]
+}
+
+type News {
+  authorConnection: NewsAuthorConnection
+  body: NewsBody
+  categoryConnection(limit: Int = 100, skip: Int = 0): NewsCategoryConnection
+  date: DateTime
+  featured_imageConnection: SysAssetConnection
+  featured_image_caption: String
+  seo: Seo
+  system: EntrySystemField
+  title: String
+  url: String
+}
+
+type NewsAuthorConnection {
+  edges: [NewsAuthorEdge]
+  totalCount: Int
+}
+
+type NewsAuthorEdge {
+  node: NewsAuthorNode
+}
+
+union NewsAuthorNode = Author
+
+input NewsAuthorWhere {
+  MATCH: EvalReferenceEnum
+  author: AuthorWhere
+}
+
+type NewsBody {
+  embedded_itemsConnection(limit: Int = 100, skip: Int = 0): NewsBodyEmbeddedItemsConnection
+  json: JSON
+}
+
+type NewsBodyEmbeddedItemsConnection {
+  edges: [NewsBodyEmbeddedItemsEdge]
+  totalCount: Int
+}
+
+type NewsBodyEmbeddedItemsEdge {
+  node: NewsBodyEmbeddedItemsNode
+}
+
+union NewsBodyEmbeddedItemsNode = SysAsset
+
+type NewsCategoryConnection {
+  edges: [NewsCategoryEdge]
+  totalCount: Int
+}
+
+type NewsCategoryEdge {
+  node: NewsCategoryNode
+}
+
+union NewsCategoryNode = Category
+
+input NewsCategoryWhere {
+  MATCH: EvalReferenceEnum
+  category: CategoryWhere
+}
+
+enum NewsOrderBy {
+  created_at_ASC
+  created_at_DESC
+  updated_at_ASC
+  updated_at_DESC
+}
+
+input NewsWhere {
+  AND: [NewsWhere]
+  OR: [NewsWhere]
+  author: NewsAuthorWhere
+  author_exists: Boolean
+  body: JSON
+  body_exists: Boolean
+  category: NewsCategoryWhere
+  category_count: Int
+  category_exists: Boolean
+  created_at: DateTime
+  created_at_gt: DateTime
+  created_at_gte: DateTime
+  created_at_in: [DateTime]
+  created_at_lt: DateTime
+  created_at_lte: DateTime
+  created_at_ne: DateTime
+  created_at_nin: [DateTime]
+  created_by: String
+  created_by_in: [String]
+  created_by_ne: String
+  created_by_nin: [String]
+  date: DateTime
+  date_exists: Boolean
+  date_gt: DateTime
+  date_gte: DateTime
+  date_in: [DateTime]
+  date_lt: DateTime
+  date_lte: DateTime
+  date_ne: DateTime
+  date_nin: [DateTime]
+  featured_image: SysAssetWhere
+  featured_image_caption: String
+  featured_image_caption_exists: Boolean
+  featured_image_caption_in: [String]
+  featured_image_caption_ne: String
+  featured_image_caption_nin: [String]
+  featured_image_exists: Boolean
+  locale: String
+  locale_exists: Boolean
+  locale_in: [String]
+  locale_ne: String
+  locale_nin: [String]
+  publish_details: SystemPublishDetailsWhere
+  seo: SeoWhere
+  seo_exists: Boolean
+  tags_in: [String]
+  tags_nin: [String]
+  title: String
+  title_exists: Boolean
+  title_in: [String]
+  title_ne: String
+  title_nin: [String]
+  uid: String
+  uid_exists: Boolean
+  uid_in: [String]
+  uid_ne: String
+  uid_nin: [String]
+  updated_at: DateTime
+  updated_at_gt: DateTime
+  updated_at_gte: DateTime
+  updated_at_in: [DateTime]
+  updated_at_lt: DateTime
+  updated_at_lte: DateTime
+  updated_at_ne: DateTime
+  updated_at_nin: [DateTime]
+  updated_by: String
+  updated_by_in: [String]
+  updated_by_ne: String
+  updated_by_nin: [String]
+  url: String
+  url_exists: Boolean
+  url_in: [String]
+  url_ne: String
+  url_nin: [String]
+  version: Int
+  version_gt: Int
+  version_gte: Int
+  version_in: [Int]
+  version_lt: Int
+  version_lte: Int
+  version_ne: Int
+  version_nin: [Int]
+}
+
+type Page {
+  custom: JSON
+  global_field: Seo
+  main_content: [PageMainContent]
+  system: EntrySystemField
+  title: String
+  url: String
+}
+
+union PageMainContent = PageMainContentActions | PageMainContentBlog | PageMainContentBuckets | PageMainContentHeroSection | PageMainContentRichText | PageMainContentSpotlight
+
+type PageMainContentActions {
+  actions: PageMainContentActionsBlock
+}
+
+type PageMainContentActionsBlock {
+  actions: [PageMainContentActionsBlockActions]
+}
+
+type PageMainContentActionsBlockActions {
+  description: String
+  link: Link
+  title: String
+}
+
+input PageMainContentActionsBlockActionsWhere {
+  description: String
+  description_exists: Boolean
+  description_in: [String]
+  description_ne: String
+  description_nin: [String]
+  link: LinkWhere
+  link_exists: Boolean
+  title: String
+  title_exists: Boolean
+  title_in: [String]
+  title_ne: String
+  title_nin: [String]
+}
+
+input PageMainContentActionsBlockWhere {
+  actions: PageMainContentActionsBlockActionsWhere
+  actions_exists: Boolean
+}
+
+type PageMainContentBlog {
+  blog: PageMainContentBlogBlock
+}
+
+type PageMainContentBlogBlock {
+  link: Link
+  referenceConnection(limit: Int = 100, skip: Int = 0): PageMainContentBlogBlockReferenceConnection
+  title: String
+}
+
+type PageMainContentBlogBlockReferenceConnection {
+  edges: [PageMainContentBlogBlockReferenceEdge]
+  totalCount: Int
+}
+
+type PageMainContentBlogBlockReferenceEdge {
+  node: PageMainContentBlogBlockReferenceNode
+}
+
+union PageMainContentBlogBlockReferenceNode = BlogArticle
+
+input PageMainContentBlogBlockReferenceWhere {
+  MATCH: EvalReferenceEnum
+  blog_article: BlogArticleWhere
+}
+
+input PageMainContentBlogBlockWhere {
+  link: LinkWhere
+  link_exists: Boolean
+  reference: PageMainContentBlogBlockReferenceWhere
+  reference_count: Int
+  reference_exists: Boolean
+  title: String
+  title_exists: Boolean
+  title_in: [String]
+  title_ne: String
+  title_nin: [String]
+}
+
+type PageMainContentBuckets {
+  buckets: PageMainContentBucketsBlock
+}
+
+type PageMainContentBucketsBlock {
+  actions: [PageMainContentBucketsBlockActions]
+  description: String
+  title: String
+}
+
+type PageMainContentBucketsBlockActions {
+  description: String
+  iconConnection: SysAssetConnection
+  link: Link
+  title: String
+}
+
+input PageMainContentBucketsBlockActionsWhere {
+  description: String
+  description_exists: Boolean
+  description_in: [String]
+  description_ne: String
+  description_nin: [String]
+  icon: SysAssetWhere
+  icon_exists: Boolean
+  link: LinkWhere
+  link_exists: Boolean
+  title: String
+  title_exists: Boolean
+  title_in: [String]
+  title_ne: String
+  title_nin: [String]
+}
+
+input PageMainContentBucketsBlockWhere {
+  actions: PageMainContentBucketsBlockActionsWhere
+  actions_exists: Boolean
+  description: String
+  description_exists: Boolean
+  description_in: [String]
+  description_ne: String
+  description_nin: [String]
+  title: String
+  title_exists: Boolean
+  title_in: [String]
+  title_ne: String
+  title_nin: [String]
+}
+
+type PageMainContentHeroSection {
+  hero_section: PageMainContentHeroSectionBlock
+}
+
+type PageMainContentHeroSectionBlock {
+  background_color: String
+  description: String
+  hero_image: PageMainContentHeroSectionBlockHeroImage
+  link: Link
+  text_color: String
+  title: String
+}
+
+type PageMainContentHeroSectionBlockHeroImage {
+  imageConnection: SysAssetConnection
+  position: String
+  video: JSON
+}
+
+input PageMainContentHeroSectionBlockHeroImageWhere {
+  image: SysAssetWhere
+  image_exists: Boolean
+  position: String
+  position_exists: Boolean
+  position_in: [String]
+  position_ne: String
+  position_nin: [String]
+  video: JSON
+  video_exists: Boolean
+}
+
+input PageMainContentHeroSectionBlockWhere {
+  background_color: String
+  background_color_exists: Boolean
+  background_color_in: [String]
+  background_color_ne: String
+  background_color_nin: [String]
+  description: String
+  description_exists: Boolean
+  description_in: [String]
+  description_ne: String
+  description_nin: [String]
+  hero_image: PageMainContentHeroSectionBlockHeroImageWhere
+  hero_image_exists: Boolean
+  link: LinkWhere
+  link_exists: Boolean
+  text_color: String
+  text_color_exists: Boolean
+  text_color_in: [String]
+  text_color_ne: String
+  text_color_nin: [String]
+  title: String
+  title_exists: Boolean
+  title_in: [String]
+  title_ne: String
+  title_nin: [String]
+}
+
+type PageMainContentRichText {
+  rich_text: PageMainContentRichTextBlock
+}
+
+type PageMainContentRichTextBlock {
+  rich_text_editor: PageMainContentRichTextBlockRichTextEditor
+}
+
+type PageMainContentRichTextBlockRichTextEditor {
+  embedded_itemsConnection(limit: Int = 100, skip: Int = 0): PageMainContentRichTextBlockRichTextEditorEmbeddedItemsConnection
+  json: JSON
+}
+
+type PageMainContentRichTextBlockRichTextEditorEmbeddedItemsConnection {
+  edges: [PageMainContentRichTextBlockRichTextEditorEmbeddedItemsEdge]
+  totalCount: Int
+}
+
+type PageMainContentRichTextBlockRichTextEditorEmbeddedItemsEdge {
+  node: PageMainContentRichTextBlockRichTextEditorEmbeddedItemsNode
+}
+
+union PageMainContentRichTextBlockRichTextEditorEmbeddedItemsNode = SysAsset
+
+input PageMainContentRichTextBlockWhere {
+  rich_text_editor: JSON
+  rich_text_editor_exists: Boolean
+}
+
+type PageMainContentSpotlight {
+  spotlight: PageMainContentSpotlightBlock
+}
+
+type PageMainContentSpotlightBlock {
+  caption: [PageMainContentSpotlightBlockCaption]
+  description: String
+  title: String
+}
+
+type PageMainContentSpotlightBlockCaption {
+  description: String
+  imageConnection: SysAssetConnection
+  title: String
+}
+
+input PageMainContentSpotlightBlockCaptionWhere {
+  description: String
+  description_exists: Boolean
+  description_in: [String]
+  description_ne: String
+  description_nin: [String]
+  image: SysAssetWhere
+  image_exists: Boolean
+  title: String
+  title_exists: Boolean
+  title_in: [String]
+  title_ne: String
+  title_nin: [String]
+}
+
+input PageMainContentSpotlightBlockWhere {
+  caption: PageMainContentSpotlightBlockCaptionWhere
+  caption_exists: Boolean
+  description: String
+  description_exists: Boolean
+  description_in: [String]
+  description_ne: String
+  description_nin: [String]
+  title: String
+  title_exists: Boolean
+  title_in: [String]
+  title_ne: String
+  title_nin: [String]
+}
+
+input PageMainContentWhere {
+  actions: PageMainContentActionsBlockWhere
+  actions_exists: Boolean
+  blog: PageMainContentBlogBlockWhere
+  blog_exists: Boolean
+  buckets: PageMainContentBucketsBlockWhere
+  buckets_exists: Boolean
+  hero_section: PageMainContentHeroSectionBlockWhere
+  hero_section_exists: Boolean
+  rich_text: PageMainContentRichTextBlockWhere
+  rich_text_exists: Boolean
+  spotlight: PageMainContentSpotlightBlockWhere
+  spotlight_exists: Boolean
+}
+
+enum PageOrderBy {
+  created_at_ASC
+  created_at_DESC
+  updated_at_ASC
+  updated_at_DESC
+}
+
+input PageWhere {
+  AND: [PageWhere]
+  OR: [PageWhere]
+  created_at: DateTime
+  created_at_gt: DateTime
+  created_at_gte: DateTime
+  created_at_in: [DateTime]
+  created_at_lt: DateTime
+  created_at_lte: DateTime
+  created_at_ne: DateTime
+  created_at_nin: [DateTime]
+  created_by: String
+  created_by_in: [String]
+  created_by_ne: String
+  created_by_nin: [String]
+  custom: JSON
+  custom_exists: Boolean
+  global_field: SeoWhere
+  global_field_exists: Boolean
+  locale: String
+  locale_exists: Boolean
+  locale_in: [String]
+  locale_ne: String
+  locale_nin: [String]
+  main_content: PageMainContentWhere
+  main_content_exists: Boolean
+  publish_details: SystemPublishDetailsWhere
+  tags_in: [String]
+  tags_nin: [String]
+  title: String
+  title_exists: Boolean
+  title_in: [String]
+  title_ne: String
+  title_nin: [String]
+  uid: String
+  uid_exists: Boolean
+  uid_in: [String]
+  uid_ne: String
+  uid_nin: [String]
+  updated_at: DateTime
+  updated_at_gt: DateTime
+  updated_at_gte: DateTime
+  updated_at_in: [DateTime]
+  updated_at_lt: DateTime
+  updated_at_lte: DateTime
+  updated_at_ne: DateTime
+  updated_at_nin: [DateTime]
+  updated_by: String
+  updated_by_in: [String]
+  updated_by_ne: String
+  updated_by_nin: [String]
+  url: String
+  url_exists: Boolean
+  url_in: [String]
+  url_ne: String
+  url_nin: [String]
+  version: Int
+  version_gt: Int
+  version_gte: Int
+  version_in: [Int]
+  version_lt: Int
+  version_lte: Int
+  version_ne: Int
+  version_nin: [Int]
+}
+
+type Query {
+  all_assets(fallback_locale: Boolean = false, limit: Int = 25, locale: String = "en-us", order_by: [SysAssetOrderBy] = [updated_at_DESC], skip: Int = 0, where: SysAssetWhere): AllSysAsset
+  all_author(fallback_locale: Boolean = false, limit: Int = 25, locale: String! = "en-us", order_by: [AuthorOrderBy] = [updated_at_DESC], skip: Int = 0, where: AuthorWhere): AllAuthor
+  all_blog_article(fallback_locale: Boolean = false, limit: Int = 25, locale: String! = "en-us", order_by: [BlogArticleOrderBy] = [updated_at_DESC], skip: Int = 0, where: BlogArticleWhere): AllBlogArticle
+  all_blt7cd35243deeac36b(fallback_locale: Boolean = false, limit: Int = 25, locale: String! = "en-us", order_by: [Blt7Cd35243Deeac36BOrderBy] = [updated_at_DESC], skip: Int = 0, where: Blt7Cd35243Deeac36BWhere): AllBlt7Cd35243Deeac36B
+  all_category(fallback_locale: Boolean = false, limit: Int = 25, locale: String! = "en-us", order_by: [CategoryOrderBy] = [updated_at_DESC], skip: Int = 0, where: CategoryWhere): AllCategory
+  all_faq(fallback_locale: Boolean = false, limit: Int = 25, locale: String! = "en-us", order_by: [FaqOrderBy] = [updated_at_DESC], skip: Int = 0, where: FaqWhere): AllFaq
+  all_footer(fallback_locale: Boolean = false, limit: Int = 25, locale: String! = "en-us", order_by: [FooterOrderBy] = [updated_at_DESC], skip: Int = 0, where: FooterWhere): AllFooter
+  all_menu(fallback_locale: Boolean = false, limit: Int = 25, locale: String! = "en-us", order_by: [MenuOrderBy] = [updated_at_DESC], skip: Int = 0, where: MenuWhere): AllMenu
+  all_news(fallback_locale: Boolean = false, limit: Int = 25, locale: String! = "en-us", order_by: [NewsOrderBy] = [updated_at_DESC], skip: Int = 0, where: NewsWhere): AllNews
+  all_page(fallback_locale: Boolean = false, limit: Int = 25, locale: String! = "en-us", order_by: [PageOrderBy] = [updated_at_DESC], skip: Int = 0, where: PageWhere): AllPage
+  all_settings(fallback_locale: Boolean = false, limit: Int = 25, locale: String! = "en-us", order_by: [SettingsOrderBy] = [updated_at_DESC], skip: Int = 0, where: SettingsWhere): AllSettings
+  assets(fallback_locale: Boolean = false, locale: String = "en-us", uid: String!): SysAsset
+  author(fallback_locale: Boolean = false, locale: String! = "en-us", uid: String!): Author
+  blog_article(fallback_locale: Boolean = false, locale: String! = "en-us", uid: String!): BlogArticle
+  blt7cd35243deeac36b(fallback_locale: Boolean = false, locale: String! = "en-us", uid: String!): Blt7Cd35243Deeac36B
+  category(fallback_locale: Boolean = false, locale: String! = "en-us", uid: String!): Category
+  faq(fallback_locale: Boolean = false, locale: String! = "en-us", uid: String!): Faq
+  footer(fallback_locale: Boolean = false, locale: String! = "en-us", uid: String!): Footer
+  menu(fallback_locale: Boolean = false, locale: String! = "en-us", uid: String!): Menu
+  news(fallback_locale: Boolean = false, locale: String! = "en-us", uid: String!): News
+  page(fallback_locale: Boolean = false, locale: String! = "en-us", uid: String!): Page
+  settings(fallback_locale: Boolean = false, locale: String! = "en-us", uid: String!): Settings
+}
+
+type Seo {
+  description: String
+  keywords: String
+  title: String
+}
+
+input SeoWhere {
+  description: String
+  description_exists: Boolean
+  description_in: [String]
+  description_ne: String
+  description_nin: [String]
+  keywords: String
+  keywords_exists: Boolean
+  keywords_in: [String]
+  keywords_ne: String
+  keywords_nin: [String]
+  title: String
+  title_exists: Boolean
+  title_in: [String]
+  title_ne: String
+  title_nin: [String]
+}
+
+type Settings {
+  copyright: String
+  logoConnection: SysAssetConnection
+  menuConnection: SettingsMenuConnection
+  site_title: String
+  social_links: SocialLinks
+  system: EntrySystemField
+  title: String
+}
+
+type SettingsMenuConnection {
+  edges: [SettingsMenuEdge]
+  totalCount: Int
+}
+
+type SettingsMenuEdge {
+  node: SettingsMenuNode
+}
+
+union SettingsMenuNode = Menu
+
+input SettingsMenuWhere {
+  MATCH: EvalReferenceEnum
+  menu: MenuWhere
+}
+
+enum SettingsOrderBy {
+  created_at_ASC
+  created_at_DESC
+  updated_at_ASC
+  updated_at_DESC
+}
+
+input SettingsWhere {
+  AND: [SettingsWhere]
+  OR: [SettingsWhere]
+  copyright: String
+  copyright_exists: Boolean
+  copyright_in: [String]
+  copyright_ne: String
+  copyright_nin: [String]
+  created_at: DateTime
+  created_at_gt: DateTime
+  created_at_gte: DateTime
+  created_at_in: [DateTime]
+  created_at_lt: DateTime
+  created_at_lte: DateTime
+  created_at_ne: DateTime
+  created_at_nin: [DateTime]
+  created_by: String
+  created_by_in: [String]
+  created_by_ne: String
+  created_by_nin: [String]
+  locale: String
+  locale_exists: Boolean
+  locale_in: [String]
+  locale_ne: String
+  locale_nin: [String]
+  logo: SysAssetWhere
+  logo_exists: Boolean
+  menu: SettingsMenuWhere
+  menu_exists: Boolean
+  publish_details: SystemPublishDetailsWhere
+  site_title: String
+  site_title_exists: Boolean
+  site_title_in: [String]
+  site_title_ne: String
+  site_title_nin: [String]
+  social_links: SocialLinksWhere
+  social_links_exists: Boolean
+  tags_in: [String]
+  tags_nin: [String]
+  title: String
+  title_exists: Boolean
+  title_in: [String]
+  title_ne: String
+  title_nin: [String]
+  uid: String
+  uid_exists: Boolean
+  uid_in: [String]
+  uid_ne: String
+  uid_nin: [String]
+  updated_at: DateTime
+  updated_at_gt: DateTime
+  updated_at_gte: DateTime
+  updated_at_in: [DateTime]
+  updated_at_lt: DateTime
+  updated_at_lte: DateTime
+  updated_at_ne: DateTime
+  updated_at_nin: [DateTime]
+  updated_by: String
+  updated_by_in: [String]
+  updated_by_ne: String
+  updated_by_nin: [String]
+  version: Int
+  version_gt: Int
+  version_gte: Int
+  version_in: [Int]
+  version_lt: Int
+  version_lte: Int
+  version_ne: Int
+  version_nin: [Int]
+}
+
+type SocialLinks {
+  social_links: [SocialLinksSocialLinks]
+}
+
+type SocialLinksSocialLinks {
+  iconConnection: SysAssetConnection
+  link: Link
+  name: String
+}
+
+input SocialLinksSocialLinksWhere {
+  icon: SysAssetWhere
+  icon_exists: Boolean
+  link: LinkWhere
+  link_exists: Boolean
+  name: String
+  name_exists: Boolean
+  name_in: [String]
+  name_ne: String
+  name_nin: [String]
+}
+
+input SocialLinksWhere {
+  social_links: SocialLinksSocialLinksWhere
+  social_links_exists: Boolean
+}
+
+type SysAsset {
+  content_type: String
+  description: String
+  dimension: SysAssetDimension
+  file_size: Int
+  filename: String
+  metadata: JSON
+  system: SysAssetSystemField
+  title: String
+  unique_identifier: String
+  url(
+    """
+    Contentstack Image Delivery API is used to retrieve, manipulate and/or convert image files of your Contentstack account and deliver it to your web or mobile properties
+    """
+    transform: SysAssetTransformUrl
+  ): String
+}
+
+"""WEBP images are usually lower in size and have good quality."""
+enum SysAssetAutoValues {
+  WEBP
+}
+
+type SysAssetConnection {
+  edges: [SysAssetEdge]
+  totalCount: Int
+}
+
+type SysAssetDimension {
+  height: Int
+  width: Int
+}
+
+input SysAssetDimensionWhere {
+  height: Int
+  height_exists: Boolean
+  height_gt: Int
+  height_gte: Int
+  height_in: [Int]
+  height_lt: Int
+  height_lte: Int
+  height_ne: Int
+  height_nin: [Int]
+  width: Int
+  width_exists: Boolean
+  width_gt: Int
+  width_gte: Int
+  width_in: [Int]
+  width_lt: Int
+  width_lte: Int
+  width_ne: Int
+  width_nin: [Int]
+}
+
+enum SysAssetDisableValues {
+  """
+  UPSCALE is always enabled, in which the image is upscaled if the output image (by specifying the width or height) is bigger than the source image
+  """
+  UPSCALE
+}
+
+"""This parameter allows an image to be downloaded or rendered on page"""
+enum SysAssetDispositionValues {
+  """Allows to download an image"""
+  ATTACHMENT
+
+  """Allows an image to be rendered on page"""
+  INLINE
+}
+
+type SysAssetEdge {
+  node: SysAsset
+}
+
+enum SysAssetFitValues {
+  BOUNDS
+  CROP
+}
+
+enum SysAssetImageFormats {
+  """Convert an image to GIF format"""
+  GIF
+
+  """Convert an image to JPEG format"""
+  JPG
+
+  """
+  A Progressive JPEG is an image file created using a compression method that displays higher detail in progression
+  """
+  PJPG
+
+  """Convert an image to PNG format"""
+  PNG
+
+  """WEBP images are usually lower in size and have good quality"""
+  WEBP
+
+  """WEBP Lossless format"""
+  WEBPLL
+
+  """WEBP Lossy format"""
+  WEBPLY
+}
+
+enum SysAssetOrderBy {
+  created_at_ASC
+  created_at_DESC
+  updated_at_ASC
+  updated_at_DESC
+}
+
+enum SysAssetOrientValues {
+  """Flip image horizontally and vertically"""
+  BOTH
+
+  """Set image to default"""
+  DEFAULT
+
+  """Flip image horizontally"""
+  HORIZONTALLY
+
+  """Flip image horizontally and then rotate 90 degrees towards left"""
+  ROTATE90LEFT
+
+  """Rotate image 90 degrees towards right"""
+  ROTATE90RIGHT
+
+  """Flip image vertically"""
+  VERTICALLY
+}
+
+"""
+The overlay_align parameter allows you to put one image on top of another
+"""
+enum SysAssetOverlayAlignValues {
+  """Align the overlay image to the bottom of the actual image"""
+  BOTTOM
+
+  """
+  Align the overlay image to the center (horizontally) of the actual image
+  """
+  CENTER
+
+  """Align the overlay image to the left of the actual image"""
+  LEFT
+
+  """Align the overlay image to the middle (vertically) of the actual image"""
+  MIDDLE
+
+  """Align the overlay image to the right of the actual image"""
+  RIGHT
+
+  """Align the overlay image to the top of the actual image"""
+  TOP
+}
+
+enum SysAssetOverlayRepeatValues {
+  """Horizontal and vertical repetition"""
+  BOTH
+
+  """Horizontal repetition"""
+  X
+
+  """Vertical repetition"""
+  Y
+}
+
+type SysAssetSystemField {
+  branch: String
+  content_type_uid: String
+  created_at: DateTime
+  created_by: String
+  extensionConnection(limit: Int = 25, skip: Int = 0): SysExtensionConnection
+  publish_details: SystemPublishDetails
+  tags: [String]
+  uid: String
+  updated_at: DateTime
+  updated_by: String
+  version: Int
+}
+
+input SysAssetTransformUrl {
+  """
+  When the auto parameter is set to webp, it enables WebP image support. WebP images have higher compression rate with minimum loss of quality.
+  """
+  auto: SysAssetAutoValues
+
+  """
+  The bg-color parameter lets you set a backgroud color for the given image. This is useful when applying padding or for replacing the transparent pixels of an image
+  """
+  bg_color: String
+  crop: String
+
+  """
+  The disable parameter disables the functionality that is enabled by default
+  """
+  disable: SysAssetDisableValues
+
+  """The disposition parameter lets you allow image to download or render. """
+  disposition: SysAssetDispositionValues
+
+  """
+  The dpr parameter lets you deliver images with appropriate size to devices that come with a defined device pixel ratio. The device pixel ratio of any device determines the screen resolution that its CSS would interpret
+  """
+  dpr: String
+
+  """
+  Fit parameter enables you to fit the given image properly within the specified height and width
+  """
+  fit: SysAssetFitValues
+
+  """
+  Format parameter lets you converts a given image from one format to another
+  """
+  format: SysAssetImageFormats
+  height: String
+
+  """
+  The orient parameter lets you control the cardinal orientation of the given image
+  """
+  orient: SysAssetOrientValues
+  overlay: String
+  overlay_align: SysAssetOverlayAlignValues
+
+  """
+  The value for this parameter can be set in pixels or percentage. For pixel value, use any whole number between 1 and 8192. For percentage value, use any decimal number between 0.0 and 0.99. When height is defined in percentage, it relative to the output image
+  """
+  overlay_height: String
+
+  """
+  The overlay_repeat parameter lets you define how the overlay image will be repeated on the given image
+  """
+  overlay_repeat: SysAssetOverlayRepeatValues
+
+  """
+  The value for this parameter can be set in pixels or percentage. For pixel value, use any whole number between 1 and 8192. For percentage value, use any decimal number between 0.0 and 0.99. When width is defined in percentage, it is relative to the output image
+  """
+  overlay_width: String
+
+  """
+  This parameter lets you add extra pixels to the edges of an image. You can specify values for top, right, bottom, and left padding for an image
+  """
+  pad: String
+  quality: Int
+  trim: String
+  width: String
+}
+
+input SysAssetWhere {
+  AND: [SysAssetWhere]
+  OR: [SysAssetWhere]
+  created_at: DateTime
+  created_at_gt: DateTime
+  created_at_gte: DateTime
+  created_at_in: [DateTime]
+  created_at_lt: DateTime
+  created_at_lte: DateTime
+  created_at_ne: DateTime
+  created_at_nin: [DateTime]
+  description: String
+  description_exists: Boolean
+  description_in: [String]
+  description_ne: String
+  description_nin: [String]
+  dimension: SysAssetDimensionWhere
+  dimension_exists: Boolean
+  file_size: Int
+  file_size_exists: Boolean
+  file_size_gt: Int
+  file_size_gte: Int
+  file_size_in: [Int]
+  file_size_lt: Int
+  file_size_lte: Int
+  file_size_ne: Int
+  file_size_nin: [Int]
+  filename: String
+  filename_exists: Boolean
+  filename_in: [String]
+  filename_ne: String
+  filename_nin: [String]
+  tags: String
+  tags_in: [String]
+  tags_nin: [String]
+  title: String
+  title_exists: Boolean
+  title_in: [String]
+  title_ne: String
+  title_nin: [String]
+  uid: String
+  uid_exists: Boolean
+  uid_in: [String]
+  uid_ne: String
+  uid_nin: [String]
+  updated_at: DateTime
+  updated_at_gt: DateTime
+  updated_at_gte: DateTime
+  updated_at_in: [DateTime]
+  updated_at_lt: DateTime
+  updated_at_lte: DateTime
+  updated_at_ne: DateTime
+  updated_at_nin: [DateTime]
+  url: String
+  url_exists: Boolean
+  url_in: [String]
+  url_ne: String
+  url_nin: [String]
+}
+
+type SysExtensionConnection {
+  edges: [SysExtensionEdge]
+  totalCount: Int
+}
+
+type SysExtensionEdge {
+  node: SysMetadata
+}
+
+type SysMetadata {
+  extension_uid: String
+  metadata: [JSON]
+}
+
+type SystemPublishDetails {
+  environment: String
+  locale: String
+  time: DateTime
+  user: String
+}
+
+input SystemPublishDetailsWhere {
+  locale: String
+  locale_in: [String]
+  locale_ne: String
+  locale_nin: [String]
+  time: DateTime
+  time_gt: DateTime
+  time_gte: DateTime
+  time_in: [DateTime]
+  time_lt: DateTime
+  time_lte: DateTime
+  time_ne: DateTime
+  time_nin: [DateTime]
+  user: String
+  user_in: [String]
+  user_ne: String
+  user_nin: [String]
+}

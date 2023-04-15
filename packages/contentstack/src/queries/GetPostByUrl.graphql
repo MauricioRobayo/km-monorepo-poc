@@ -1,0 +1,7 @@
+query GetPostByUrl($url: String!) {
+  all_blog_article(where: { url: $url }) {
+    items {
+      ...blogArticleFields
+    }
+  }
+}

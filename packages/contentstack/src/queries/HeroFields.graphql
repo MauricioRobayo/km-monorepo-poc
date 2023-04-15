@@ -1,0 +1,18 @@
+fragment heroFields on PageMainContentHeroSection {
+  __typename
+  hero_section {
+    background_color
+    description
+    hero_image {
+      imageConnection {
+        ...imageFields
+      }
+      position
+    }
+    link {
+      ...linkFields
+    }
+    text_color
+    title
+  }
+}

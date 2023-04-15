@@ -1,0 +1,5 @@
+fragment systemFields on EntrySystemField {
+  content_type_uid
+  locale
+  uid
+}

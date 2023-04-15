@@ -1,0 +1,45 @@
+query GetSettingsByUid($uid: String!) {
+  settings(uid: $uid) {
+    copyright
+    site_title
+    logoConnection {
+      ...imageFields
+    }
+    menuConnection {
+      edges {
+        node {
+          ... on Menu {
+            title
+            menu_items {
+              label
+              external_link {
+                ...linkFields
+              }
+              internal_linkConnection {
+                edges {
+                  node {
+                    ... on Page {
+                      title
+                      url
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    social_links {
+      social_links {
+        iconConnection {
+          ...imageFields
+        }
+        link {
+          ...linkFields
+        }
+        name
+      }
+    }
+  }
+}

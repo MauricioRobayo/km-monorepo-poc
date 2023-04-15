@@ -1,0 +1,17 @@
+fragment bucketsFields on PageMainContentBuckets {
+  __typename
+  buckets {
+    actions {
+      description
+      iconConnection {
+        ...imageFields
+      }
+      link {
+        ...linkFields
+      }
+      title
+    }
+    title
+    description
+  }
+}
